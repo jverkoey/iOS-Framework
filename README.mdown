@@ -116,12 +116,12 @@ like this:
 ```
 
 Once you've created your framework header file, you need to make it a "public" header. Public
-headers are headers that will be copied to the .framework file and can be imported by the users
-of your framework. This differs from "project" headers which will not be distributed with the
-framework. This distinction is what allows you to have a concept of public and private APIs.
+headers are headers that will be copied to the .framework and can be imported. This differs from
+"project" headers which will *not* be distributed with the framework. This distinction is what
+allows you to have a concept of public and private APIs.
 
 To modify the scope of any header, select it in the project explorer and then expand the Utilities
-view.
+pane (Cmd+Option+0).
 
 [![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/utilitiesbutton.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/utilitiesbutton.png)
 
@@ -140,3 +140,45 @@ select the project in the file explorer and then click the "Build Settings" tab.
 "public headers" and then modify the setting for all configurations to be "Headers".
 
 [![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheadersconfig.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheadersconfig.png)
+
+### Ongoing step: Adding new sources to the framework
+
+Whenever you add new source to the framework you must decide whether to expose the .h publicly or
+not. To modify a header's scope you will follow the same process as Step 2.
+
+### Step 4: Disable code stripping
+
+We do not want to strip any code from the library; we leave this up to the application that is
+linking to the framework. To disable code stripping we must modify the following configuration
+settings:
+
+    "Dead Code Stripping" => No (for all settings)
+    "Strip Debug Symbols During Copy" => No (for all settings)
+    "Strip Style" => Non-Global Symbols (for all settings)
+
+### Step 5: Prepare the Framework
+
+In order to use the static library as though it were a framework we're going to generate the basic
+skeleton of the framework in the static library target. To do this we'll include a simple post-build
+script.
+
+    set -e
+
+    mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A"
+    mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
+
+    # Link the "Current" version to "A"
+    ln -sf A "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current"
+    ln -sf Versions/Current/Headers "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers"
+    ln -sf "Versions/Current/${PRODUCT_NAME}" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}"
+
+    # The -a ensures that the headers maintain the source modification date so that we don't constantly
+    # cause propagating rebuilds of files that import these headers.
+    cp -a "${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
+
+Try building your project now and look at the build products directory (usually
+`~/Library/Developer/Xcode/DerivedData/<ProjectName>-<gibberish>/Build/Products/...`). You should
+see a `libSerenity.a` static library, a `Headers` folder, and a `Serenity.framework` folder that
+contains the basic skeleton of your framework.
+
+[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/buildphase1.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/buildphase1.png)
