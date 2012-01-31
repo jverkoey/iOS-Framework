@@ -176,6 +176,8 @@ script.
     # cause propagating rebuilds of files that import these headers.
     cp -a "${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
 
+[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/prepareframework.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/prepareframework.png)
+
 Try building your project now and look at the build products directory (usually
 `~/Library/Developer/Xcode/DerivedData/<ProjectName>-<gibberish>/Build/Products/...`). You should
 see a `libSerenity.a` static library, a `Headers` folder, and a `Serenity.framework` folder that
