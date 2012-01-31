@@ -51,8 +51,8 @@ results in the .framework binary being distributed with the application! Alterna
 developers to only copy what's in the resources folder to their app, but this is complicated and
 requires we namespace our resource file names to avoid naming conflicts.
 
-The Solution
-============
+The Ideal Solution
+==================
 
 There are a few constraints that we want to satisfy when building a .framework:
 
@@ -89,3 +89,12 @@ little bit of work in the framework project to ensure that you can use your fram
 the same way a third party developer would (i.e. importing <MyFramework/MyFramework.h> should work
 as expected).
 
+Create the Static Library Target
+--------------------------------
+
+### Step 1: Create a new `Cocoa Touch Static Library` project.
+
+[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/newstaticlib.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/newstaticlib.png)
+
+The product name will be the name of your framework. For example, `Serenity` will create
+`Serenity.framework`.
