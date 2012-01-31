@@ -1,0 +1,72 @@
+Building a static iOS framework is a pain in the ass. There are a variety of existing solutions
+already and each one has its own disadvantage.
+
+Existing Solutions
+==================
+
+A Google search for "iOS static framework" reveals the following Github project:
+[https://github.com/kstenerud/iOS-Universal-Framework](https://github.com/kstenerud/iOS-Universal-Framework)
+
+This project provides two solutions: "fake" frameworks and "real" frameworks.
+
+A **fake** framework is a bundle target with a .framework extension and some post-build scripts to
+generate the fat library for the .framework.
+
+A **real** framework modifies the Xcode installation and generates a true .framework target. Real
+frameworks also use post-build scripts to generate the fat library.
+
+### Problems with Fake Frameworks
+
+The problem with a fake framework is that you can't link to the framework as a dependent target. You
+can "trick" Xcode into linking to the framework by using the `-framework` flag in your `LD_FLAGS`,
+but changes to the framework will not be reflected in iterative builds. This requires that you clean
+build every time you modify the framework, or make a trivial modification to the application itself
+in order for it to forcefully relink to the new .framework. This bug is discussed
+[here](https://github.com/kstenerud/iOS-Universal-Framework/issues/32).
+
+*Example warning when you attempt to link to the .framework target:*
+
+ warning: skipping file
+'/Users/featherless/Library/Developer/Xcode/DerivedData/SimpleApp-cshmhxdgzacibsgaiiryutjzobcb/Build/Products/Debug-iphonesimulator/fakeframework.framework'
+(unexpected file type 'wrapper.cfbundle' in Frameworks & Libraries build phase)
+
+### Problems with Real Frameworks
+
+To use real frameworks you need to modify your Xcode installation. This is simply not scalable when
+you want to work with a team of people. If you use a build farm this problem becomes even worse
+because it may not be possible to modify the Xcode installations on the build servers.
+
+### Problems with Both Fake and Real Frameworks
+
+In both frameworks there is a post-build step that builds the "inverse" platform. For example, if
+you're building the framework for i386, the post-build step will build the framework for armv6/armv7
+and then smush the libraries together into one fat binary within the framework. The problem with
+this is that it **triples** the build time of the framework. Make one change to a .m file and
+suddenly you're rebuilding it for three platforms. Change a PCH and your project will effectively
+perform three clean builds. This is simply not ok from a productivity standpoint.
+
+There is also the problem of distributing resources with the .framework. Both the fake and real
+frameworks include an "embeddedframework" which is meant to be copied into the application. This
+results in the .framework binary being distributed with the application! Alternatively we could ask
+developers to only copy what's in the resources folder to their app, but this is complicated and
+requires we namespace our resource file names to avoid naming conflicts.
+
+The Solution
+============
+
+There are a few constraints that we want to satisfy when building a .framework:
+
+- Fast iterative builds when developing the framework. We may have a simple application that has the
+.framework as a dependency and we want to quickly iterate on development of the .framework. -
+Infrequent distribution builds of the .framework. - Want to be able to easily distribute resources
+with the framework. - Setup for third-party developers using the .framework should be *easy*.
+
+I believe that the solution I will outline below satisfies each of these constraints.
+
+The .framework Project
+----------------------
+
+Within the .framework project we are going to have three targets: a static library, a bundle, and an
+aggregate.
+
+The static library
