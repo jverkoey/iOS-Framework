@@ -92,9 +92,51 @@ as expected).
 Create the Static Library Target
 --------------------------------
 
-### Step 1: Create a new `Cocoa Touch Static Library` project.
+### Step 1: Create a new "Cocoa Touch Static Library" project.
 
 [![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/newstaticlib.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/newstaticlib.png)
 
-The product name will be the name of your framework. For example, `Serenity` will create
-`Serenity.framework`.
+The product name will be the name of your framework. For example, `Serenity` will generate
+`Serenity.framework` once we've set up the project.
+
+### Step 2: Create the primary framework header.
+
+Developers expect to be able to import your framework by importing the `<Serenity/Serenity.h>`
+header. Ensure that your project has such a header (if you created a new static library then there
+should already be a Serenity.h and Serenity.m file; you can delete the .m).
+
+Within this header you are going to import all of the public headers for your framework. For
+example, let's assume that we have some `Widget` with a .h and .m. Our Serenity.h file would look
+like this:
+
+```
+#import <Foundation/Foundation.h>
+
+#import <Serenity/Widget.h>
+```
+
+Once you've created your framework header file, you need to make it a "public" header. Public
+headers are headers that will be copied to the .framework file and can be imported by the users
+of your framework. This differs from "project" headers which will not be distributed with the
+framework. This distinction is what allows you to have a concept of public and private APIs.
+
+To modify the scope of any header, select it in the project explorer and then expand the Utilities
+view.
+
+[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/utilitiesbutton.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/utilitiesbutton.png)
+
+Look at the "Target Membership" group and ensure that the checkbox next to the .h file is checked.
+Change the scope of the header from "Project" to "Public". This will ensure that the header gets
+copied to the correct location in the copy headers phase.
+
+[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheaders.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheaders.png)
+
+### Step 3: Update the public headers location
+
+By default the static library project will copy private and public headers to the same folder,
+`/usr/local/include`. To avoid mistakenly copying private headers to our framework we want to ensure
+that our public headers are copied to a specific directory, say `Headers`. To change this setting
+select the project in the file explorer and then click the "Build Settings" tab. Search for
+"public headers" and then modify the setting for all configurations to be "Headers".
+
+[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheadersconfig.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheadersconfig.png)
