@@ -57,16 +57,35 @@ The Solution
 There are a few constraints that we want to satisfy when building a .framework:
 
 - Fast iterative builds when developing the framework. We may have a simple application that has the
-.framework as a dependency and we want to quickly iterate on development of the .framework. -
-Infrequent distribution builds of the .framework. - Want to be able to easily distribute resources
-with the framework. - Setup for third-party developers using the .framework should be *easy*.
+  .framework as a dependency and we want to quickly iterate on development of the .framework.
+- Infrequent distribution builds of the .framework.
+- Want to be able to easily distribute resources with the framework.
+- Setup for third-party developers using the .framework should be *easy*.
 
-I believe that the solution I will outline below satisfies each of these constraints.
+I believe that the solution I will outline below satisfies each of these constraints. I will outline
+how to build a .framework project from scratch so that you can apply these steps to an existing
+project if you so desire. I will also include project templates for easily creating a
+.framework.
 
-The .framework Project
-----------------------
+Overview
+--------
 
-Within the .framework project we are going to have three targets: a static library, a bundle, and an
-aggregate.
+Within the project we are going to have three targets: a static library, a bundle, and an aggregate.
 
-The static library
+The static library target will build the source into a static library (.a) and specify which headers
+will be "public", meaning they will be accessible within the .framework.
+
+The bundle target will contain all of our resources and will be loadable from the framework.
+
+The aggregate target will build the static library for i386/armv6/armv7, generate the fat framework
+binary, and build the bundle. You will run this target when you wish to build the .framework for
+distribution.
+
+When you are working on the framework you will likely have an internal application that links to the
+framework. This application will link to the static library target as you normally would and copy
+the .bundle in the copy resources phase. This has the benefit of only building the framework code
+for the platform you're actively working on, significantly improving your build times. We'll do a
+little bit of work in the framework project to ensure that you can use your framework in your app
+the same way a third party developer would (i.e. importing <MyFramework/MyFramework.h> should work
+as expected).
+
