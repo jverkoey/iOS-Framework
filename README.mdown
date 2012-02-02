@@ -181,6 +181,8 @@ ln -sf "Versions/Current/${PRODUCT_NAME}" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}
 cp -a "${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
 ```
 
+![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/prepareframework.png)
+
 This will generate the following folder structure:
 
 ```
@@ -196,8 +198,6 @@ Serenity.framework/
         Widget.h
     Current -> A
 ```
-
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/prepareframework.png)
 
 Try building your project now and look at the build products directory (usually
 `~/Library/Developer/Xcode/DerivedData/<ProjectName>-<gibberish>/Build/Products/...`). You should
@@ -295,9 +295,51 @@ xcodebuild -project "${PROJECT_FILE_PATH}" -target "${TARGET_NAME}" -configurati
 lipo -create "${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" -output "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}"
 ```
 
+#### Important Note
 
+The above script assumes that your library name matches your project name in the following line:
 
+```bash
+SF_TARGET_NAME=${PROJECT_NAME}
+```
 
+If this is not the case (e.g. your xcode project is named SerenityFramework and the target name is
+Serenity) then you need to explicitly set the target name on that line. For example:
+
+```bash
+SF_TARGET_NAME=Serenity
+```
+
+### Step 4: Build and Verify
+
+You now have everything set up to build a distributable .framework to third-party developers. Try
+building the aggregate target. Once it's done, expand the Products folder in Xcode, right click the
+static library and click "Show in Finder". If this doesn't open Finder to where the static library
+exists then try opening
+`~/Library/Developer/Xcode/DerivedData/<project name>/Build/Products/Debug-iphonesimulator/`.
+
+Within this folder you will see your .framework folder. <b>Note</b>: the fat .framework binary will
+be built in the active platform's folder. If you're building for the iPhone simulator, for example,
+then the .framework fat binary will be placed in the `-iphonesimulator` folder. Always make sure
+that you are grabbing the correct .framework when you are preparing to distribute it!
+
+You can now drag the .framework elsewhere, zip it up, upload it, and distribute it to your
+third-party developers.
+
+Adding the Framework to an Application
+--------------------------------------
+
+This is the easy part. Simply drag the .framework to your application's project, ensuring that it's
+being added to the necessary targets. Then import your framework header and you're kickin' ass.
+
+```obj-c
+#import <Serenity/Serenity.h>
+```
+
+TODO: Resources and Bundles
+---------------------------
+
+Coming soon.
 
 
 
