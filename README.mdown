@@ -94,7 +94,7 @@ Create the Static Library Target
 
 ### Step 1: Create a new "Cocoa Touch Static Library" project.
 
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/newstaticlib.png)
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newstaticlib.png)
 
 The product name will be the name of your framework. For example, `Serenity` will generate
 `Serenity.framework` once we've set up the project.
@@ -122,14 +122,14 @@ This distinction is what allows you to have a concept of public and private APIs
 
 To modify the scope of any header, select the header in the project explorer and then expand the
 Utilities pane
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/utilitiesbutton.png)
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/utilitiesbutton.png)
 (Cmd+Option+0).
 
 Look at the "Target Membership" group and ensure that the checkbox next to the .h file is checked.
 Change the scope of the header from "Project" to "Public". This will ensure that the header gets
 copied to the correct location in the copy headers phase.
 
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheaders.png)
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/publicheaders.png)
 
 ### Step 3: Update the public headers location
 
@@ -139,7 +139,7 @@ that our public headers are copied to a separate directory, e.g. `Headers`. To c
 select the project in the file explorer and then click the "Build Settings" tab. Search for "public
 headers" and then set the "Public Headers Folder Path" to "Headers" for all configurations.
 
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheadersconfig.png)
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/publicheadersconfig.png)
 
 ### Ongoing step: Adding new sources to the framework
 
@@ -183,7 +183,7 @@ ln -sf "Versions/Current/${PRODUCT_NAME}" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}
 cp -a "${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
 ```
 
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/prepareframework.png)
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/prepareframework.png)
 
 This will generate the following folder structure:
 
@@ -206,7 +206,7 @@ Try building your project now and look at the build products directory (usually
 see a `libSerenity.a` static library, a `Headers` folder, and a `Serenity.framework` folder that
 contains the basic skeleton of your framework.
 
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/buildphase1.png)
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/buildphase1.png)
 
 Create the Framework Distribution Target
 ----------------------------------------
@@ -225,13 +225,13 @@ To generate this fat binary we're going to build the static library target for e
 
 Click File => New Target and create a new Aggregate target. Title it something like "Framework".
 
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/aggregatetarget.png)
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/aggregatetarget.png)
 
 ### Step 2: Add the Static Library as a Dependent Target
 
 Add the static library target to the "Target Dependencies".
 
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/targetdependencies.png)
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/targetdependencies.png)
 
 ### Step 3: Build the Other Platform
 
@@ -362,7 +362,7 @@ To add the framework as a dependent target in your application, drag the framewo
 Xcode and drop it in your application's frameworks folder. This will add a reference to the
 framework's xcodeproj folder.
 
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/dependentapp.png)
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/dependentapp.png)
 
 ### Step 2: Make the Framework Static Library Target a Dependency
 
@@ -371,7 +371,7 @@ dependency. Select your project in the Xcode file explorer and open the "Build P
 the "Target Dependencies" group and click the + button. Select the static library target and click
 "Add".
 
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/addtarget.png)
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/addtarget.png)
 
 ### Step 3: Link your Application with the Framework Static Library
 
@@ -379,7 +379,7 @@ In order to use the framework's static library we must link it into the applicat
 "Link Binary With Libraries" phase and click the + button. Select the `.a` file that's exposed by
 your framework's project and then click add.
 
-![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/linker.png)
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/linker.png)
 
 ### Step 4: Import the Framework Header
 
