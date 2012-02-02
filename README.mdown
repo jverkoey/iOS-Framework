@@ -125,7 +125,7 @@ There are a few constraints that we want to satisfy when building a .framework:
 - Fast iterative builds when developing the framework. We may have a simple application that has the
   .framework as a dependency and we want to quickly iterate on development of the .framework.
 - Infrequent distribution builds of the .framework.
-- Want to be able to easily distribute resources with the framework.
+- Resource distribution should be intuitive and not bloat the application.
 - Setup for third-party developers using the .framework should be *easy*.
 
 I believe that the solution I will outline below satisfies each of these constraints. I will outline
