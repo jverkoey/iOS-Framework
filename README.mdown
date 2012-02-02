@@ -67,9 +67,9 @@ in order for it to forcefully relink to the new .framework. This bug is discusse
 
 *Example warning when you attempt to link to the .framework target:*
 
- warning: skipping file
-'/Users/featherless/Library/Developer/Xcode/DerivedData/SimpleApp-cshmhxdgzacibsgaiiryutjzobcb/Build/Products/Debug-iphonesimulator/fakeframework.framework'
-(unexpected file type 'wrapper.cfbundle' in Frameworks & Libraries build phase)
+    warning: skipping file
+    '/Users/featherless/Library/Developer/Xcode/DerivedData/SimpleApp-cshmhxdgzacibsgaiiryutjzobcb/Build/Products/Debug-iphonesimulator/fakeframework.framework'
+    (unexpected file type 'wrapper.cfbundle' in Frameworks & Libraries build phase)
 
 ### Problems with Real Frameworks
 
