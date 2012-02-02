@@ -418,12 +418,12 @@ Import your framework header and you're kickin' ass.
 Developing the Framework as a Dependent Project
 ===============================================
 
+> View a sample project that shows the result of following these steps in the `sample/DependentApp`
+> directory.
+
 When developing the framework you want to minimize build times while ensuring that your experience
 roughly matches that of your third-party developers. We achieve this balance by only building the
 static library but treating the static library as though it were a framework.
-
-> View a sample project that shows the result of following these steps in the `sample/DependentApp`
-> directory.
 
 ### Step 1: Add the Framework Project to your Application Project
 
