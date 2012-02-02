@@ -5,7 +5,7 @@ Table of Contents
 =================
 
 - [Existing Solutions](#existing_solutions)
-- [The Ideal Solution](#ideal_solution)
+- [How to Create a Static Framework for iOS](#walkthrough)
   - [Overview](#overview)
   - [Create the Static Library Target](#static_library_target)
   - [Create the Framework Distribution Target](#framework_distribution_target)
@@ -64,9 +64,9 @@ results in the .framework binary being distributed with the application! Alterna
 developers to only copy what's in the resources folder to their app, but this is complicated and
 requires we namespace our resource file names to avoid naming conflicts.
 
-<a name="#ideal_solution" />
-The Ideal Solution
-==================
+<a name="#walkthrough" />
+How to Create a Static Framework for iOS
+========================================
 
 There are a few constraints that we want to satisfy when building a .framework:
 
