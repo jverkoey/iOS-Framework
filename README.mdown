@@ -94,7 +94,7 @@ Create the Static Library Target
 
 ### Step 1: Create a new "Cocoa Touch Static Library" project.
 
-[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/newstaticlib.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/newstaticlib.png)
+![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/newstaticlib.png)
 
 The product name will be the name of your framework. For example, `Serenity` will generate
 `Serenity.framework` once we've set up the project.
@@ -116,20 +116,19 @@ like this:
 ```
 
 Once you've created your framework header file, you need to make it a "public" header. Public
-headers are headers that will be copied to the .framework and can be imported. This differs from
-"project" headers which will *not* be distributed with the framework. This distinction is what
-allows you to have a concept of public and private APIs.
+headers are headers that will be copied to the .framework and can be imported by those using your
+framework. This differs from "project" headers which will *not* be distributed with the framework.
+This distinction is what allows you to have a concept of public and private APIs.
 
 To modify the scope of any header, select it in the project explorer and then expand the Utilities
 pane (Cmd+Option+0).
-
-[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/utilitiesbutton.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/utilitiesbutton.png)
+![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/utilitiesbutton.png)
 
 Look at the "Target Membership" group and ensure that the checkbox next to the .h file is checked.
 Change the scope of the header from "Project" to "Public". This will ensure that the header gets
 copied to the correct location in the copy headers phase.
 
-[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheaders.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheaders.png)
+![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheaders.png)
 
 ### Step 3: Update the public headers location
 
@@ -139,7 +138,7 @@ that our public headers are copied to a specific directory, say `Headers`. To ch
 select the project in the file explorer and then click the "Build Settings" tab. Search for
 "public headers" and then modify the setting for all configurations to be "Headers".
 
-[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheadersconfig.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheadersconfig.png)
+![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheadersconfig.png)
 
 ### Ongoing step: Adding new sources to the framework
 
@@ -179,11 +178,11 @@ the title of the phase (I've named it "Prepare Framework", for example).
     # cause propagating rebuilds of files that import these headers.
     cp -a "${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
 
-[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/prepareframework.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/prepareframework.png)
+![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/prepareframework.png)
 
 Try building your project now and look at the build products directory (usually
 `~/Library/Developer/Xcode/DerivedData/<ProjectName>-<gibberish>/Build/Products/...`). You should
 see a `libSerenity.a` static library, a `Headers` folder, and a `Serenity.framework` folder that
 contains the basic skeleton of your framework.
 
-[![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/buildphase1.png)](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/buildphase1.png)
+![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/buildphase1.png)
