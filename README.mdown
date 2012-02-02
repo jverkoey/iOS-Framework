@@ -32,7 +32,7 @@ reasons why they should be avoided.
 iOS-Universal-Framework
 -----------------------
 
-[https://github.com/kstenerud/iOS-Universal-Framework](https://github.com/kstenerud/iOS-Universal-Framework)
+Source: [https://github.com/kstenerud/iOS-Universal-Framework](https://github.com/kstenerud/iOS-Universal-Framework)
 
 ### Major problems
 
@@ -88,7 +88,7 @@ requires we namespace our resource file names to avoid naming conflicts.
 db-in's solution ("Fake" frameworks)
 ----------------
 
-http://db-in.com/blog/2011/07/universal-framework-iphone-ios-2-0/
+Source: http://db-in.com/blog/2011/07/universal-framework-iphone-ios-2-0/
 
 ### Major problems
 
