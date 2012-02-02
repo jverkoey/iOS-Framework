@@ -309,6 +309,7 @@
 				66F5F16014DB3B310068FD20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

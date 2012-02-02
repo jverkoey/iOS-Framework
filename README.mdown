@@ -70,6 +70,9 @@ project if you so desire. I will also include project templates for easily creat
 Overview
 --------
 
+> View a sample project that shows the result of following these steps in the `sample/Serenity`
+> directory.
+
 Within the project we are going to have three targets: a static library, a bundle, and an aggregate.
 
 The static library target will build the source into a static library (.a) and specify which headers
@@ -333,8 +336,15 @@ third-party developers.
 Adding the Framework to an Application
 --------------------------------------
 
+> View a sample project that shows the result of following these steps in the `sample/ThirdParty`
+> directory.
+
 This is the easy part. Simply drag the .framework to your application's project, ensuring that it's
-being added to the necessary targets. Then import your framework header and you're kickin' ass.
+being added to the necessary targets.
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/thirdparty.png)
+
+Import your framework header and you're kickin' ass.
 
 ```obj-c
 #import <Serenity/Serenity.h>
