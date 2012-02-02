@@ -1,0 +1,327 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		66F5F13314DB195B0068FD20 /* Framework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 66F5F13614DB195B0068FD20 /* Build configuration list for PBXAggregateTarget "Framework" */;
+			buildPhases = (
+				66F5F13A14DB19B20068FD20 /* Build Other Platform */,
+			);
+			dependencies = (
+				66F5F13914DB19940068FD20 /* PBXTargetDependency */,
+			);
+			name = Framework;
+			productName = Framework;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		66E8B6D714D899500074EAA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E8B6D614D899500074EAA4 /* Foundation.framework */; };
+		66E8B6E314D89CCE0074EAA4 /* Serenity.h in Headers */ = {isa = PBXBuildFile; fileRef = 66E8B6DB14D899500074EAA4 /* Serenity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		66E8B6E614D89FBE0074EAA4 /* Widget.h in Headers */ = {isa = PBXBuildFile; fileRef = 66E8B6E414D89FBE0074EAA4 /* Widget.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		66E8B6E714D89FBE0074EAA4 /* Widget.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E8B6E514D89FBE0074EAA4 /* Widget.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		66F5F13814DB19940068FD20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66E8B6CA14D899500074EAA4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66E8B6D214D899500074EAA4;
+			remoteInfo = Serenity;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		66E8B6D314D899500074EAA4 /* libSerenity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSerenity.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		66E8B6D614D899500074EAA4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		66E8B6DA14D899500074EAA4 /* Serenity-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Serenity-Prefix.pch"; sourceTree = "<group>"; };
+		66E8B6DB14D899500074EAA4 /* Serenity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Serenity.h; sourceTree = "<group>"; };
+		66E8B6E414D89FBE0074EAA4 /* Widget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Widget.h; sourceTree = "<group>"; };
+		66E8B6E514D89FBE0074EAA4 /* Widget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Widget.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		66E8B6D014D899500074EAA4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66E8B6D714D899500074EAA4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		66E8B6C814D899500074EAA4 = {
+			isa = PBXGroup;
+			children = (
+				66E8B6D814D899500074EAA4 /* Serenity */,
+				66E8B6D514D899500074EAA4 /* Frameworks */,
+				66E8B6D414D899500074EAA4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		66E8B6D414D899500074EAA4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66E8B6D314D899500074EAA4 /* libSerenity.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66E8B6D514D899500074EAA4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66E8B6D614D899500074EAA4 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		66E8B6D814D899500074EAA4 /* Serenity */ = {
+			isa = PBXGroup;
+			children = (
+				66E8B6DA14D899500074EAA4 /* Serenity-Prefix.pch */,
+				66E8B6DB14D899500074EAA4 /* Serenity.h */,
+				66E8B6E414D89FBE0074EAA4 /* Widget.h */,
+				66E8B6E514D89FBE0074EAA4 /* Widget.m */,
+			);
+			path = Serenity;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		66E8B6D114D899500074EAA4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66E8B6E314D89CCE0074EAA4 /* Serenity.h in Headers */,
+				66E8B6E614D89FBE0074EAA4 /* Widget.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		66E8B6D214D899500074EAA4 /* Serenity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66E8B6E014D899500074EAA4 /* Build configuration list for PBXNativeTarget "Serenity" */;
+			buildPhases = (
+				66E8B6CF14D899500074EAA4 /* Sources */,
+				66E8B6D014D899500074EAA4 /* Frameworks */,
+				66E8B6D114D899500074EAA4 /* Headers */,
+				66E8B6E814D8A4D10074EAA4 /* Prepare Framework */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Serenity;
+			productName = Serenity;
+			productReference = 66E8B6D314D899500074EAA4 /* libSerenity.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		66E8B6CA14D899500074EAA4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = Google;
+			};
+			buildConfigurationList = 66E8B6CD14D899500074EAA4 /* Build configuration list for PBXProject "Serenity" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 66E8B6C814D899500074EAA4;
+			productRefGroup = 66E8B6D414D899500074EAA4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				66E8B6D214D899500074EAA4 /* Serenity */,
+				66F5F13314DB195B0068FD20 /* Framework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		66E8B6E814D8A4D10074EAA4 /* Prepare Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Prepare Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A\"\n\nln -sf A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\nln -sf Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\nln -sf \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\ncp -a \"${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n";
+		};
+		66F5F13A14DB19B20068FD20 /* Build Other Platform */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Other Platform";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\n    exit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\nSF_TARGET_NAME=${PROJECT_NAME}\nSF_EXECUTABLE_PATH=\"lib${SF_TARGET_NAME}.a\"\nSF_WRAPPER_NAME=\"${SF_TARGET_NAME}.framework\"\n\n# The following conditonals come from\n# https://github.com/kstenerud/iOS-Universal-Framework\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    SF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n      SF_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    SF_OTHER_PLATFORM=iphonesimulator\n    SF_ARCHS=i386\nelse\n    SF_OTHER_PLATFORM=iphoneos\n    # Force armv6 to be built because Xcode 4 likes to only build armv7\n    SF_ARCHS=\"armv6 armv7\"\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$SF_SDK_PLATFORM$ ]]\nthen\n    SF_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\n# Build the other platform.\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${SF_OTHER_PLATFORM}\" ARCHS=\"${SF_ARCHS}\" $ACTION\n\n# Smash the two static libraries into one fat binary and store it in the .framework\nlipo -create \"${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" -output \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		66E8B6CF14D899500074EAA4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66E8B6E714D89FBE0074EAA4 /* Widget.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		66F5F13914DB19940068FD20 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66E8B6D214D899500074EAA4 /* Serenity */;
+			targetProxy = 66F5F13814DB19940068FD20 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		66E8B6DE14D899500074EAA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		66E8B6DF14D899500074EAA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		66E8B6E114D899500074EAA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/Serenity.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Serenity/Serenity-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = Headers;
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
+			};
+			name = Debug;
+		};
+		66E8B6E214D899500074EAA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/Serenity.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Serenity/Serenity-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = Headers;
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
+			};
+			name = Release;
+		};
+		66F5F13414DB195B0068FD20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		66F5F13514DB195B0068FD20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		66E8B6CD14D899500074EAA4 /* Build configuration list for PBXProject "Serenity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66E8B6DE14D899500074EAA4 /* Debug */,
+				66E8B6DF14D899500074EAA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66E8B6E014D899500074EAA4 /* Build configuration list for PBXNativeTarget "Serenity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66E8B6E114D899500074EAA4 /* Debug */,
+				66E8B6E214D899500074EAA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66F5F13614DB195B0068FD20 /* Build configuration list for PBXAggregateTarget "Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66F5F13414DB195B0068FD20 /* Debug */,
+				66F5F13514DB195B0068FD20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 66E8B6CA14D899500074EAA4 /* Project object */;
+}
