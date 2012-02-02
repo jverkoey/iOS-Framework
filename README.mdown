@@ -9,6 +9,7 @@ following constraints while having no deal-breaking disadvantages.
 - Simple set-up for third-parties.
 - Support for building the framework as a dependent target (i.e. modifying source in the framework
   and building an app will automatically rebuild the framework and relink as expected).
+- Works with the latest version of Xcode
 
 Table of Contents
 =================
