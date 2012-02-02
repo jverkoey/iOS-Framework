@@ -64,7 +64,7 @@ results in the .framework binary being distributed with the application! Alterna
 developers to only copy what's in the resources folder to their app, but this is complicated and
 requires we namespace our resource file names to avoid naming conflicts.
 
-<a name="#walkthrough" />
+<a name="walkthrough" />
 How to Create a Static Framework for iOS
 ========================================
 
