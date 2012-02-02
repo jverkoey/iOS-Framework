@@ -5,6 +5,13 @@ Table of Contents
 =================
 
 - [Existing Solutions](#existing_solutions)
+- [The Ideal Solution](#ideal_solution)
+  - [Overview](#overview)
+  - [Create the Static Library Target](#static_library_target)
+  - [Create the Framework Distribution Target](#framework_distribution_target)
+- [Adding the Framework to a Third-Party Application](#third_parties)
+- [Developing the Framework as a Dependent Project](#first_parties)
+- [TODO: Resources and Bundles](#resources)
 
 <a name="existing_solutions" />
 Existing Solutions
@@ -57,6 +64,7 @@ results in the .framework binary being distributed with the application! Alterna
 developers to only copy what's in the resources folder to their app, but this is complicated and
 requires we namespace our resource file names to avoid naming conflicts.
 
+<a name="#ideal_solution" />
 The Ideal Solution
 ==================
 
@@ -73,6 +81,7 @@ how to build a .framework project from scratch so that you can apply these steps
 project if you so desire. I will also include project templates for easily creating a
 .framework.
 
+<a name="overview" />
 Overview
 --------
 
@@ -98,6 +107,7 @@ little bit of work in the framework project to ensure that you can use your fram
 the same way a third party developer would (i.e. importing <MyFramework/MyFramework.h> should work
 as expected).
 
+<a name="static_library_target" />
 Create the Static Library Target
 --------------------------------
 
@@ -217,6 +227,7 @@ contains the basic skeleton of your framework.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/buildphase1.png)
 
+<a name="framework_distribution_target">
 Create the Framework Distribution Target
 ----------------------------------------
 
@@ -339,14 +350,15 @@ that you are grabbing the correct .framework when you are preparing to distribut
 You can now drag the .framework elsewhere, zip it up, upload it, and distribute it to your
 third-party developers.
 
-Adding the Framework to an Application
---------------------------------------
+<a name="third_parties" />
+Adding the Framework to a Third-Party Application
+=================================================
 
 > View a sample project that shows the result of following these steps in the `sample/ThirdParty`
 > directory.
 
-This is the easy part. Simply drag the .framework to your application's project, ensuring that it's
-being added to the necessary targets.
+This is the easy part (and what your third-party developers will have to do). Simply drag the
+.framework to your application's project, ensuring that it's being added to the necessary targets.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/thirdparty.png)
 
@@ -356,8 +368,9 @@ Import your framework header and you're kickin' ass.
 #import <Serenity/Serenity.h>
 ```
 
+<a name="first_parties" />
 Developing the Framework as a Dependent Project
------------------------------------------------
+===============================================
 
 When developing the framework you want to minimize build times while ensuring that your experience
 roughly matches that of your third-party developers. We achieve this balance by only building the
@@ -409,9 +422,9 @@ Build your application and verify a couple things:
 - Your framework should be linked into the application.
 - You shouldn't get any compiler or linker errors.
 
-
+<a name="resources" />
 TODO: Resources and Bundles
----------------------------
+===========================
 
 Coming soon.
 
