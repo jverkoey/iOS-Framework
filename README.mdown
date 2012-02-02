@@ -6,7 +6,8 @@ Table of Contents
 
 - [Existing Solutions](#existing_solutions)
 
-Existing Solutions {#existing_solutions}
+<a name="existing_solutions" />
+Existing Solutions
 ==================
 
 A Google search for "iOS static framework" reveals the following Github project:
