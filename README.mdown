@@ -26,11 +26,20 @@ Table of Contents
 Existing Solutions
 ==================
 
+Presented below are a few of the most popular solutions for building static iOS frameworks and the
+reasons why they should be avoided.
+
 iOS-Universal-Framework
 -----------------------
 
-A Google search for "iOS static framework" reveals the following Github project:
 [https://github.com/kstenerud/iOS-Universal-Framework](https://github.com/kstenerud/iOS-Universal-Framework)
+
+### Major problems
+
+- Slow iterative build times
+- Has to modify Xcode for "Real" frameworks
+- Can't properly add framework as a dependent target for "Fake" frameworks
+- No adequate solution for resource loading
 
 This project provides two solutions: "fake" frameworks and "real" frameworks.
 
@@ -80,6 +89,12 @@ db-in's solution ("Fake" frameworks)
 ----------------
 
 http://db-in.com/blog/2011/07/universal-framework-iphone-ios-2-0/
+
+### Major problems
+
+- Slow iterative build times
+- Can't properly add framework as a dependent target
+- No adequate solution for resource loading (recommends a remarkably *bad* solution)
 
 db-in's solution is roughly identical to kstenerud's solution of using a bundle target to generate a
 fake framework. This has the same disadvantages as outlined above so I won't repeat myself.
