@@ -114,6 +114,8 @@ OK</b>. This will end up copying not just the resources from your framework, but
 of the framework! Doing this will inflate the size of your application by several megabytes more
 than it should be because you're shipping off a fat binary with your application.
 
+And so without further ado...
+
 <a name="walkthrough" />
 How to Create a Static Framework for iOS
 ========================================
