@@ -165,6 +165,8 @@ script. Add a post-build script by selecting your project in the file navigator 
 script in the source portion of the run script build phase. You can rename the phase by clicking
 the title of the phase (I've named it "Prepare Framework", for example).
 
+#### prepare_framework.sh
+
 ```bash
 set -e
 
@@ -235,6 +237,8 @@ Add the static library target to the "Target Dependencies".
 
 To build the other platform we're going to use a "Run Script" phase to execute some basic commands.
 Add a new "Run Script" Build Phase to your aggregate target and paste the following code into it.
+
+#### build_framework.sh
 
 ```bash
 set -e
