@@ -350,12 +350,6 @@ Import your framework header and you're kickin' ass.
 #import <Serenity/Serenity.h>
 ```
 
-TODO: Resources and Bundles
----------------------------
-
-Coming soon.
-
-
 Developing the Framework as a Dependent Project
 -----------------------------------------------
 
@@ -409,6 +403,11 @@ Build your application and verify a couple things:
 - Your framework should be linked into the application.
 - You shouldn't get any compiler or linker errors.
 
+
+TODO: Resources and Bundles
+---------------------------
+
+Coming soon.
 
 
 
