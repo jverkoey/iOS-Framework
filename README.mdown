@@ -216,7 +216,8 @@ headers" and then set the "Public Headers Folder Path" to "Headers" for all conf
 ### Ongoing step: Adding new sources to the framework
 
 Whenever you add new source to the framework you must decide whether to expose the .h publicly or
-not. To modify a header's scope you will follow the same process as Step 2.
+not. To modify a header's scope you will follow the same process as Step 2. By default a header's
+scope will be "Project", meaning it will not be copied to the framework's public headers.
 
 ### Step 4: Disable code stripping
 
