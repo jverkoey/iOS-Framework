@@ -120,9 +120,10 @@ headers are headers that will be copied to the .framework and can be imported by
 framework. This differs from "project" headers which will *not* be distributed with the framework.
 This distinction is what allows you to have a concept of public and private APIs.
 
-To modify the scope of any header, select it in the project explorer and then expand the Utilities
-pane (Cmd+Option+0).
+To modify the scope of any header, select the header in the project explorer and then expand the
+Utilities pane
 ![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/utilitiesbutton.png)
+(Cmd+Option+0).
 
 Look at the "Target Membership" group and ensure that the checkbox next to the .h file is checked.
 Change the scope of the header from "Project" to "Public". This will ensure that the header gets
@@ -132,11 +133,11 @@ copied to the correct location in the copy headers phase.
 
 ### Step 3: Update the public headers location
 
-By default the static library project will copy private and public headers to the same folder,
+By default the static library project will copy private and public headers to the same folder:
 `/usr/local/include`. To avoid mistakenly copying private headers to our framework we want to ensure
-that our public headers are copied to a specific directory, say `Headers`. To change this setting
-select the project in the file explorer and then click the "Build Settings" tab. Search for
-"public headers" and then modify the setting for all configurations to be "Headers".
+that our public headers are copied to a separate directory, e.g. `Headers`. To change this setting,
+select the project in the file explorer and then click the "Build Settings" tab. Search for "public
+headers" and then set the "Public Headers Folder Path" to "Headers" for all configurations.
 
 ![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/publicheadersconfig.png)
 
@@ -155,7 +156,7 @@ settings:
     "Strip Debug Symbols During Copy" => No (for all settings)
     "Strip Style" => Non-Global Symbols (for all settings)
 
-### Step 5: Prepare the Framework
+### Step 5: Prepare the Framework for use as a Dependent Target
 
 In order to use the static library as though it were a framework we're going to generate the basic
 skeleton of the framework in the static library target. To do this we'll include a simple post-build
@@ -186,3 +187,110 @@ see a `libSerenity.a` static library, a `Headers` folder, and a `Serenity.framew
 contains the basic skeleton of your framework.
 
 ![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/buildphase1.png)
+
+Create the Framework Distribution Target
+----------------------------------------
+
+When actively developing the framework we only care to build the platform that we're testing on. For
+example, if we're testing on the iPhone simulator then we only need to build the i386 platform.
+
+This changes when we want to distribute the framework to third party developers. The third-party
+developers don't have the option of rebuilding the framework for each platform, so we must provide
+what is called a "fat binary" version of the static library that is comprised of the possible
+platforms. These platforms include: i386, armv6, and armv7.
+
+To generate this fat binary we're going to build the static library target for each platform.
+
+### Step 1: Create an Aggregate Target
+
+Click File => New Target and create a new Aggregate target. Title it something like "Framework".
+
+![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/aggregatetarget.png)
+
+### Step 2: Add the Static Library as a Dependent Target
+
+Add the static library target to the "Target Dependencies".
+
+![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/targetdependencies.png)
+
+### Step 3: Build the Other Platform
+
+To build the other platform we're going to use a "Run Script" phase to execute some basic commands.
+Add a new "Run Script" Build Phase to your aggregate target and paste the following code into it.
+
+    set -e
+    set +u
+    # Avoid recursively calling this script.
+    if [[ $SF_MASTER_SCRIPT_RUNNING ]]
+    then
+        exit 0
+    fi
+    set -u
+    export SF_MASTER_SCRIPT_RUNNING=1
+
+    SF_TARGET_NAME=${PROJECT_NAME}
+    SF_EXECUTABLE_PATH="lib${SF_TARGET_NAME}.a"
+    SF_WRAPPER_NAME="${SF_TARGET_NAME}.framework"
+
+    # The following conditonals come from
+    # https://github.com/kstenerud/iOS-Universal-Framework
+
+    if [[ "$SDK_NAME" =~ ([A-Za-z]+) ]]
+    then
+        SF_SDK_PLATFORM=${BASH_REMATCH[1]}
+    else
+        echo "Could not find platform name from SDK_NAME: $SDK_NAME"
+        exit 1
+    fi
+
+    if [[ "$SDK_NAME" =~ ([0-9]+.*$) ]]
+    then
+          SF_SDK_VERSION=${BASH_REMATCH[1]}
+    else
+        echo "Could not find sdk version from SDK_NAME: $SDK_NAME"
+        exit 1
+    fi
+
+    if [[ "$SF_SDK_PLATFORM" = "iphoneos" ]]
+    then
+        SF_OTHER_PLATFORM=iphonesimulator
+        SF_ARCHS=i386
+    else
+        SF_OTHER_PLATFORM=iphoneos
+        # Force armv6 to be built because Xcode 4 likes to only build armv7
+        SF_ARCHS="armv6 armv7"
+    fi
+
+    if [[ "$BUILT_PRODUCTS_DIR" =~ (.*)$SF_SDK_PLATFORM$ ]]
+    then
+        SF_OTHER_BUILT_PRODUCTS_DIR="${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}"
+    else
+        echo "Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR"
+        exit 1
+    fi
+
+    # Build the other platform.
+    xcodebuild -project "${PROJECT_FILE_PATH}" -target "${TARGET_NAME}" -configuration "${CONFIGURATION}" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR="${BUILD_DIR}" CONFIGURATION_TEMP_DIR="${PROJECT_TEMP_DIR}/${CONFIGURATION}-${SF_OTHER_PLATFORM}" ARCHS="${SF_ARCHS}" $ACTION
+    
+    # Smash the two static libraries into one fat binary and store it in the .framework
+    lipo -create "${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" -output "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
