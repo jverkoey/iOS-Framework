@@ -5,9 +5,10 @@ following constraints while having no deal-breaking disadvantages.
 - Fast iterative compilation times (up to 3x faster than some solutions!).
 - Easy distribution and packaging.
 - No modifications to Xcode.
+- No trickery with fake bundle targets and the likes.
 - Simple set-up for third-parties.
 - Support for building the framework as a dependent target (i.e. modifying source in the framework
-  and building an app will automatically rebuild the framework and relink as expected)
+  and building an app will automatically rebuild the framework and relink as expected).
 
 Table of Contents
 =================
@@ -24,6 +25,9 @@ Table of Contents
 <a name="existing_solutions" />
 Existing Solutions
 ==================
+
+iOS-Universal-Framework
+-----------------------
 
 A Google search for "iOS static framework" reveals the following Github project:
 [https://github.com/kstenerud/iOS-Universal-Framework](https://github.com/kstenerud/iOS-Universal-Framework)
@@ -71,6 +75,20 @@ frameworks include an "embeddedframework" which is meant to be copied into the a
 results in the .framework binary being distributed with the application! Alternatively we could ask
 developers to only copy what's in the resources folder to their app, but this is complicated and
 requires we namespace our resource file names to avoid naming conflicts.
+
+db-in's solution ("Fake" frameworks)
+----------------
+
+http://db-in.com/blog/2011/07/universal-framework-iphone-ios-2-0/
+
+db-in's solution is roughly identical to kstenerud's solution of using a bundle target to generate a
+fake framework. This has the same disadvantages as outlined above so I won't repeat myself.
+
+There is, however, a specific deal-breaker with the recommendations in this blog post: resources.
+Db-in recommends copying the .framework into your application as a resource bundle; this is <b>NOT
+OK</b>. This will end up copying not just the resources from your framework, but also the fat binary
+of the framework! Doing this will inflate the size of your application by several megabytes more
+than it should be because you're shipping off a fat binary with your application.
 
 <a name="walkthrough" />
 How to Create a Static Framework for iOS
