@@ -1,7 +1,12 @@
 Building a static iOS framework is a pain in the ass. There are a variety of existing solutions
 already and each one has its own disadvantage.
 
-Existing Solutions
+Table of Contents
+=================
+
+- [Existing Solutions](#existing_solutions)
+
+Existing Solutions {#existing_solutions}
 ==================
 
 A Google search for "iOS static framework" reveals the following Github project:
