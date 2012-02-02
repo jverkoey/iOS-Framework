@@ -41,6 +41,8 @@ Source: [https://github.com/kstenerud/iOS-Universal-Framework](https://github.co
 - Can't properly add framework as a dependent target for "Fake" frameworks
 - No adequate solution for resource loading
 
+### Overview
+
 This project provides two solutions: "fake" frameworks and "real" frameworks.
 
 A **fake** framework is a bundle target with a .framework extension and some post-build scripts to
@@ -95,6 +97,8 @@ Source: http://db-in.com/blog/2011/07/universal-framework-iphone-ios-2-0/
 - Slow iterative build times
 - Can't properly add framework as a dependent target
 - No adequate solution for resource loading (recommends a remarkably *bad* solution)
+
+### Overview
 
 db-in's solution is roughly identical to kstenerud's solution of using a bundle target to generate a
 fake framework. This has the same disadvantages as outlined above so I won't repeat myself.
