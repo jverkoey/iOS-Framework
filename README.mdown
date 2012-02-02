@@ -181,6 +181,22 @@ ln -sf "Versions/Current/${PRODUCT_NAME}" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}
 cp -a "${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
 ```
 
+This will generate the following folder structure:
+
+```
+-- Note: "->" denotes a symbolic link --
+
+Serenity.framework/
+  Headers/ -> Versions/Current/Headers
+  Serenity -> Versions/Current/Serenity
+  Versions/
+    A/
+      Headers/
+        Serenity.h
+        Widget.h
+    Current -> A
+```
+
 ![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/prepareframework.png)
 
 Try building your project now and look at the build products directory (usually
