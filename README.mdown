@@ -165,19 +165,21 @@ script. Add a post-build script by selecting your project in the file navigator 
 script in the source portion of the run script build phase. You can rename the phase by clicking
 the title of the phase (I've named it "Prepare Framework", for example).
 
-    set -e
+```bash
+set -e
 
-    mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A"
-    mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
+mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A"
+mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
 
-    # Link the "Current" version to "A"
-    ln -sf A "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current"
-    ln -sf Versions/Current/Headers "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers"
-    ln -sf "Versions/Current/${PRODUCT_NAME}" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}"
+# Link the "Current" version to "A"
+ln -sf A "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current"
+ln -sf Versions/Current/Headers "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers"
+ln -sf "Versions/Current/${PRODUCT_NAME}" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}"
 
-    # The -a ensures that the headers maintain the source modification date so that we don't constantly
-    # cause propagating rebuilds of files that import these headers.
-    cp -a "${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
+# The -a ensures that the headers maintain the source modification date so that we don't constantly
+# cause propagating rebuilds of files that import these headers.
+cp -a "${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
+```
 
 ![](https://github.com/jverkoey/iOS-Static-Framework/raw/master/gfx/prepareframework.png)
 
