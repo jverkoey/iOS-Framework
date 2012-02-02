@@ -30,6 +30,10 @@ Existing Solutions
 Presented below are a few of the most popular solutions for building static iOS frameworks and the
 reasons why they should be avoided.
 
+> Note: Though the tone below is largely critical of the proposed solutions credit is owed to those
+> who pioneered these solutions. Much of the proposed solution is based off the work that these
+> amazingly generous people have done. Thanks!
+
 iOS-Universal-Framework
 -----------------------
 
