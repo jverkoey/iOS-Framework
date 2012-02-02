@@ -1,5 +1,13 @@
 Building a static iOS framework is a pain in the ass. There are a variety of existing solutions
-already and each one has its own disadvantage.
+already and each one has its own disadvantages. Presented here is a solution that meets all of the
+following constraints while having no deal-breaking disadvantages.
+
+- Fast iterative compilation times (up to 3x faster than some solutions!).
+- Easy distribution and packaging.
+- No modifications to Xcode.
+- Simple set-up for third-parties.
+- Support for building the framework as a dependent target (i.e. modifying source in the framework
+  and building an app will automatically rebuild the framework and relink as expected)
 
 Table of Contents
 =================
