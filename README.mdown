@@ -2,6 +2,8 @@ Building a static iOS framework is a pain in the ass. There are a variety of exi
 already and each one has its own disadvantages. Presented here is a solution that meets all of the
 following constraints while having no deal-breaking disadvantages.
 
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+
 - Fast iterative compilation times (up to 3x faster than some solutions!).
 - Easy distribution and packaging.
 - No modifications to Xcode.
@@ -22,6 +24,7 @@ Table of Contents
 - [Adding the Framework to a Third-Party Application](#third_parties)
 - [Developing the Framework as a Dependent Project](#first_parties)
 - [TODO: Resources and Bundles](#resources)
+- [License](#license)
 
 <a name="existing_solutions" />
 Existing Solutions
@@ -483,6 +486,12 @@ TODO: Resources and Bundles
 Coming soon.
 
 
+<a name="license" />
+License
+=======
 
+Except as otherwise noted, the content of this page is licensed under the Creative Commons
+Attribution 3.0 Unported License, and code samples are licensed under the Apache 2.0 License.
 
-
+To view a copy of this license, visit http://creativecommons.org/licenses/by/3.0/ or send a letter
+to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
