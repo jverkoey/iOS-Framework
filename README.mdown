@@ -25,9 +25,9 @@ Table of Contents
   - [Overview](#overview)
   - [Create the Static Library Target](#static_library_target)
   - [Create the Framework Distribution Target](#framework_distribution_target)
+- [Resources and Bundles](#resources)
 - [Adding the Framework to a Third-Party Application](#third_parties)
 - [Developing the Framework as a Dependent Project](#first_parties)
-- [TODO: Resources and Bundles](#resources)
 - [License](#license)
 
 <a name="existing_solutions" />
@@ -171,14 +171,14 @@ as expected). <a href="#first_parties">Jump to the dependent project walkthrough
 Create the Static Library Target
 --------------------------------
 
-### Step 1: Create a new "Cocoa Touch Static Library" project.
+### Step 1: Create a New "Cocoa Touch Static Library" Project
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newstaticlib.png)
 
 The product name will be the name of your framework. For example, `Serenity` will generate
 `Serenity.framework` once we've set up the project.
 
-### Step 2: Create the primary framework header.
+### Step 2: Create the Primary Framework Header
 
 Developers expect to be able to import your framework by importing the `<Serenity/Serenity.h>`
 header. Ensure that your project has such a header (if you created a new static library then there
@@ -210,7 +210,7 @@ copied to the correct location in the copy headers phase.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/publicheaders.png)
 
-### Step 3: Update the public headers location
+### Step 3: Update the Public Headers Location
 
 By default the static library project will copy private and public headers to the same folder:
 `/usr/local/include`. To avoid mistakenly copying private headers to our framework we want to ensure
@@ -220,13 +220,13 @@ headers" and then set the "Public Headers Folder Path" to "Headers" for all conf
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/publicheadersconfig.png)
 
-### Ongoing step: Adding new sources to the framework
+### Ongoing Step: Adding New Sources to the Framework
 
 Whenever you add new source to the framework you must decide whether to expose the .h publicly or
 not. To modify a header's scope you will follow the same process as Step 2. By default a header's
 scope will be "Project", meaning it will not be copied to the framework's public headers.
 
-### Step 4: Disable code stripping
+### Step 4: Disable Code Stripping
 
 We do not want to strip any code from the library; we leave this up to the application that is
 linking to the framework. To disable code stripping we must modify the following configuration
@@ -411,6 +411,133 @@ that you are grabbing the correct .framework when you are preparing to distribut
 You can now drag the .framework elsewhere, zip it up, upload it, and distribute it to your
 third-party developers.
 
+<a name="resources" />
+Resources and Bundles
+=====================
+
+To distribute resources with a framework we are going to provide the developer with a separate
+.bundle that contains all of the strings and resources. This provides a number of advantages over
+including the resources in the .framework itself.
+
+- Encapsulation of resources. We can scope resource loading to our framework's bundle.
+- Easy to add bundles to projects.
+- The developer doesn't have to copy the entire .framework into their application.
+
+The hard part about bundles is creating the target. Xcode's bundle target doesn't actually create a
+loadable bundle object, so we have to do some post-build massaging of the bundle. It's important
+that we create a bundle target because we need to create the bundle using the Copy Bundle Resources
+phase that will correctly compile .xib files (a Copy Files phase does not accomplish this!).
+
+### Step 1: Create the Bundle Target
+
+In the framework project, create a new bundle target. You will need to name the bundle something
+different from your framework name or Xcode will not let you create the target. I've named the
+target SerenityResources. We will rename the output of the target to Serenity.bundle in a following
+step.
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundletarget.png)
+
+Ensure that the Framework setting is set to "Core Foundation".
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundletarget2.png)
+
+### Step 2: Clean up the Bundle Target Settings
+
+By default the bundle will only show build settings for Mac OS X. It doesn't really matter what it
+builds for because the bundle isn't actually going to have any code in it, but I prefer to have
+things nice and consistent. Open the bundle target settings and delete the settings for
+Architectures, Base SDK, and Build Active Architecture Only.
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundlesettings.png)
+
+This is also when you should change your bundle target's product name to the name of your framework
+rather than the target name. To do so, click your project in the Xcode file explorer, select the
+bundle target, and then click the Build Settings tab. Search for Product Name and then replace
+the value of Product Name with the name of your framework.
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/serenityproductname.png)
+
+### Ongoing Step: Add Resources to the Bundle Target Copy Files Phase
+
+Whenever you add new resources that you want to include with your framework you need to add it to
+the bundle target that you created.
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundleresource.png)
+
+### Step 3: Create the Bundle Folder Structure
+
+We are going to create a "Loadable Bundle" as outlined in the following Apple document:
+
+https://developer.apple.com/library/mac/#documentation/CoreFoundation/Conceptual/CFBundles/BundleTypes/BundleTypes.html
+
+Our bundle is only going to be used for resource loading, so our bundle structure will need to
+resemble the following:
+
+```
+Serenity.bundle/
+  Contents/
+    Info.plist
+    Resources/
+      *.png
+      *.nib
+      *.lproj/
+        <Localized files>
+```
+
+By default the bundle target will copy all of the files to the root directory, so we're going to
+move them around with the following script. Add a new Run Script phase and paste the following
+script into it.
+
+```bash
+rm -rf "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents"
+mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources"
+mv "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Info.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents"
+mv ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/*.png ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources/
+mv ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/*.nib ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources/
+mv ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/*.lproj ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources/
+```
+
+Modify the script accordingly as you work with more file types. There is likely a simpler way to
+write this script so that it will capture all files.
+
+### Step 4: Add the Bundle Target to your Aggregate Target
+
+Whenever we build the framework for distribution we likely also want to build the bundle. Add the
+bundle target to your aggregate target's dependencies.
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundledependency.png)
+
+### Step 5: Loading Bundle Resources
+
+In order to load bundle resources, we must first ask the third-party developer to add the .bundle to
+their application. To do so they will simply drag the .bundle that you distributed with the
+.framework to their project and ensure that it is copied in the copy files phase of their app
+target.
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/addbundle.png)
+
+To load resources from the bundle we will use the following code:
+
+```obj-c
+// Load the framework bundle.
++ (NSBundle *)frameworkBundle {
+  static BOOL didAttemptLoad = NO;
+  static NSBundle* frameworkBundle = nil;
+  if (!didAttemptLoad) {
+    didAttemptLoad = YES;
+    NSString* mainBundlePath = [[NSBundle mainBundle] resourcePath];
+    NSString* frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:@"Serenity.bundle"];
+    frameworkBundle = [[NSBundle bundleWithPath:frameworkBundlePath] retain];
+  }
+  return frameworkBundle;
+}
+
+[UIImage imageWithContentsOfFile:[[[self class] frameworkBundle] pathForResource:@"image" ofType:@"png"]];
+```
+
+You can see an example of loading a resource from within the framework in the Widget object in the
+included Serenity framework.
+
 <a name="third_parties" />
 Adding the Framework to a Third-Party Application
 =================================================
@@ -424,6 +551,12 @@ This is the easy part (and what your third-party developers will have to do). Si
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/thirdparty.png)
 
 Import your framework header and you're kickin' ass.
+
+### Resources
+
+If you're distributing resources with your framework then you will also send the .bundle file to the
+developers. The developer will then drag the .bundle file into their application and ensure that
+it's added to the application target.
 
 ```obj-c
 #import <Serenity/Serenity.h>
@@ -475,6 +608,18 @@ can obviously choose whatever practice suits your needs.
 #import <Serenity/Serenity.h>
 ```
 
+### Step 4-b: Adding Resources
+
+If you are developing resources for your framework you can also add the bundle target as a
+dependency.
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundledependency2.png)
+
+You must then add the bundle to the Copy Bundle Resources phase of your application by expanding
+the products folder of your framework product and dragging the .bundle into that section.
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundlecopy.png)
+
 ### Step 5: Build and Test
 
 Build your application and verify a couple things:
@@ -482,13 +627,6 @@ Build your application and verify a couple things:
 - Your framework should be built before your application.
 - Your framework should be linked into the application.
 - You shouldn't get any compiler or linker errors.
-
-<a name="resources" />
-TODO: Resources and Bundles
-===========================
-
-Coming soon.
-
 
 <a name="license" />
 License

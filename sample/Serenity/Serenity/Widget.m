@@ -18,4 +18,20 @@
 
 @implementation Widget
 
++ (NSBundle *)frameworkBundle {
+  static BOOL didAttemptLoad = NO;
+  static NSBundle* frameworkBundle = nil;
+  if (!didAttemptLoad) {
+    didAttemptLoad = YES;
+    NSString* mainBundlePath = [[NSBundle mainBundle] resourcePath];
+    NSString* frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:@"Serenity.bundle"];
+    frameworkBundle = [[NSBundle bundleWithPath:frameworkBundlePath] retain];
+  }
+  return frameworkBundle;
+}
+
+- (UIImage *)image {
+  return [UIImage imageWithContentsOfFile:[[[self class] frameworkBundle] pathForResource:@"linker" ofType:@"png"]];
+}
+
 @end

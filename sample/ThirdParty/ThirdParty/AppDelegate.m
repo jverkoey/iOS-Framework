@@ -31,7 +31,9 @@
 
   // Just to prove that we can use code from the Serenity framework.
   Widget* widget = [[[Widget alloc] init] autorelease];
-  widget = widget;
+  UIImage* image = widget.image;
+  UIImageView* imageView = [[[UIImageView alloc] initWithImage:image] autorelease];
+  [self.window addSubview:imageView];
 
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];

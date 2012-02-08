@@ -14,6 +14,7 @@
 				66F5F13A14DB19B20068FD20 /* Build Other Platform */,
 			);
 			dependencies = (
+				664A26AC14E330B700C297E6 /* PBXTargetDependency */,
 				66F5F13914DB19940068FD20 /* PBXTargetDependency */,
 			);
 			name = Framework;
@@ -22,6 +23,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		664A269614E3265400C297E6 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 664A268414E3222700C297E6 /* CoreFoundation.framework */; };
+		664A269C14E3265400C297E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 664A269A14E3265400C297E6 /* InfoPlist.strings */; };
+		664A26A614E32B7500C297E6 /* linker.png in Resources */ = {isa = PBXBuildFile; fileRef = 664A26A514E32B7500C297E6 /* linker.png */; };
+		664A26A914E32C4100C297E6 /* SimpleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 664A26A814E32C4100C297E6 /* SimpleView.xib */; };
 		66E8B6D714D899500074EAA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E8B6D614D899500074EAA4 /* Foundation.framework */; };
 		66E8B6E314D89CCE0074EAA4 /* Serenity.h in Headers */ = {isa = PBXBuildFile; fileRef = 66E8B6DB14D899500074EAA4 /* Serenity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		66E8B6E614D89FBE0074EAA4 /* Widget.h in Headers */ = {isa = PBXBuildFile; fileRef = 66E8B6E414D89FBE0074EAA4 /* Widget.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -29,6 +34,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		664A26AB14E330B700C297E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66E8B6CA14D899500074EAA4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 664A269414E3265400C297E6;
+			remoteInfo = SerenityResources;
+		};
 		66F5F13814DB19940068FD20 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 66E8B6CA14D899500074EAA4 /* Project object */;
@@ -39,6 +51,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		664A268414E3222700C297E6 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		664A269514E3265400C297E6 /* Serenity.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Serenity.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		664A269914E3265400C297E6 /* SerenityResources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SerenityResources-Info.plist"; sourceTree = "<group>"; };
+		664A269B14E3265400C297E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		664A26A514E32B7500C297E6 /* linker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = linker.png; path = ../../../gfx/linker.png; sourceTree = "<group>"; };
+		664A26A814E32C4100C297E6 /* SimpleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleView.xib; sourceTree = "<group>"; };
 		66E8B6D314D899500074EAA4 /* libSerenity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSerenity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		66E8B6D614D899500074EAA4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		66E8B6DA14D899500074EAA4 /* Serenity-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Serenity-Prefix.pch"; sourceTree = "<group>"; };
@@ -48,6 +66,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		664A269214E3265400C297E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				664A269614E3265400C297E6 /* CoreFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		66E8B6D014D899500074EAA4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,10 +85,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		664A269714E3265400C297E6 /* SerenityResources */ = {
+			isa = PBXGroup;
+			children = (
+				664A26A514E32B7500C297E6 /* linker.png */,
+				664A26A814E32C4100C297E6 /* SimpleView.xib */,
+				664A26A714E32C0A00C297E6 /* English */,
+				664A269914E3265400C297E6 /* SerenityResources-Info.plist */,
+			);
+			path = SerenityResources;
+			sourceTree = "<group>";
+		};
+		664A26A714E32C0A00C297E6 /* English */ = {
+			isa = PBXGroup;
+			children = (
+				664A269A14E3265400C297E6 /* InfoPlist.strings */,
+			);
+			name = English;
+			sourceTree = "<group>";
+		};
 		66E8B6C814D899500074EAA4 = {
 			isa = PBXGroup;
 			children = (
 				66E8B6D814D899500074EAA4 /* Serenity */,
+				664A269714E3265400C297E6 /* SerenityResources */,
 				66E8B6D514D899500074EAA4 /* Frameworks */,
 				66E8B6D414D899500074EAA4 /* Products */,
 			);
@@ -72,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				66E8B6D314D899500074EAA4 /* libSerenity.a */,
+				664A269514E3265400C297E6 /* Serenity.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				66E8B6D614D899500074EAA4 /* Foundation.framework */,
+				664A268414E3222700C297E6 /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -110,6 +158,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		664A269414E3265400C297E6 /* SerenityResources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 664A269E14E3265400C297E6 /* Build configuration list for PBXNativeTarget "SerenityResources" */;
+			buildPhases = (
+				664A269114E3265400C297E6 /* Sources */,
+				664A269214E3265400C297E6 /* Frameworks */,
+				664A269314E3265400C297E6 /* Resources */,
+				664A26AA14E32EA400C297E6 /* Generate Bundle Structure */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SerenityResources;
+			productName = SerenityResources;
+			productReference = 664A269514E3265400C297E6 /* Serenity.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		66E8B6D214D899500074EAA4 /* Serenity */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 66E8B6E014D899500074EAA4 /* Build configuration list for PBXNativeTarget "Serenity" */;
@@ -150,12 +216,40 @@
 			projectRoot = "";
 			targets = (
 				66E8B6D214D899500074EAA4 /* Serenity */,
+				664A269414E3265400C297E6 /* SerenityResources */,
 				66F5F13314DB195B0068FD20 /* Framework */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		664A269314E3265400C297E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				664A269C14E3265400C297E6 /* InfoPlist.strings in Resources */,
+				664A26A614E32B7500C297E6 /* linker.png in Resources */,
+				664A26A914E32C4100C297E6 /* SimpleView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXShellScriptBuildPhase section */
+		664A26AA14E32EA400C297E6 /* Generate Bundle Structure */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Bundle Structure";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents\"\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources\"\nmv \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents\"\nmv ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/*.png ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources/\nmv ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/*.nib ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources/\nmv ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/*.lproj ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources/";
+		};
 		66E8B6E814D8A4D10074EAA4 /* Prepare Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -187,6 +281,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		664A269114E3265400C297E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		66E8B6CF14D899500074EAA4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -198,6 +299,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		664A26AC14E330B700C297E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 664A269414E3265400C297E6 /* SerenityResources */;
+			targetProxy = 664A26AB14E330B700C297E6 /* PBXContainerItemProxy */;
+		};
 		66F5F13914DB19940068FD20 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 66E8B6D214D899500074EAA4 /* Serenity */;
@@ -205,7 +311,45 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		664A269A14E3265400C297E6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				664A269B14E3265400C297E6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		664A269F14E3265400C297E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "SerenityResources/SerenityResources-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = Serenity;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		664A26A014E3265400C297E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "SerenityResources/SerenityResources-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = Serenity;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		66E8B6DE14D899500074EAA4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -295,6 +439,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		664A269E14E3265400C297E6 /* Build configuration list for PBXNativeTarget "SerenityResources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				664A269F14E3265400C297E6 /* Debug */,
+				664A26A014E3265400C297E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		66E8B6CD14D899500074EAA4 /* Build configuration list for PBXProject "Serenity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -320,6 +473,7 @@
 				66F5F13514DB195B0068FD20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

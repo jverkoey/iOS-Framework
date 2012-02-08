@@ -17,6 +17,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		664A26C514E3361500C297E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66F5F16114DB3B380068FD20 /* Serenity.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 664A269514E3265400C297E6;
+			remoteInfo = SerenityResources;
+		};
+		664A26E314E33A7500C297E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66F5F16114DB3B380068FD20 /* Serenity.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 664A269414E3265400C297E6;
+			remoteInfo = SerenityResources;
+		};
 		66F5F16914DB3B380068FD20 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 66F5F16114DB3B380068FD20 /* Serenity.xcodeproj */;
@@ -115,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				66F5F16A14DB3B380068FD20 /* libSerenity.a */,
+				664A26C614E3361500C297E6 /* Serenity.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +148,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				664A26E414E33A7500C297E6 /* PBXTargetDependency */,
 				66F5F16E14DB3D0F0068FD20 /* PBXTargetDependency */,
 			);
 			name = DependentApp;
@@ -173,6 +189,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		664A26C614E3361500C297E6 /* Serenity.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Serenity.bundle;
+			remoteRef = 664A26C514E3361500C297E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		66F5F16A14DB3B380068FD20 /* libSerenity.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -206,6 +229,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		664A26E414E33A7500C297E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SerenityResources;
+			targetProxy = 664A26E314E33A7500C297E6 /* PBXContainerItemProxy */;
+		};
 		66F5F16E14DB3D0F0068FD20 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Serenity;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		664A26B514E334EF00C297E6 /* Serenity.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 664A26B414E334EF00C297E6 /* Serenity.bundle */; };
 		66F5F18014DB420E0068FD20 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66F5F17F14DB420E0068FD20 /* UIKit.framework */; };
 		66F5F18214DB420E0068FD20 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66F5F18114DB420E0068FD20 /* Foundation.framework */; };
 		66F5F18414DB420E0068FD20 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66F5F18314DB420E0068FD20 /* CoreGraphics.framework */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		664A26B414E334EF00C297E6 /* Serenity.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Serenity.bundle; sourceTree = SOURCE_ROOT; };
 		66F5F17B14DB420E0068FD20 /* ThirdParty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThirdParty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66F5F17F14DB420E0068FD20 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		66F5F18114DB420E0068FD20 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -79,6 +81,7 @@
 				66F5F18E14DB420E0068FD20 /* AppDelegate.h */,
 				66F5F18F14DB420E0068FD20 /* AppDelegate.m */,
 				66F5F18614DB420E0068FD20 /* Supporting Files */,
+				664A26B414E334EF00C297E6 /* Serenity.bundle */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66F5F18A14DB420E0068FD20 /* InfoPlist.strings in Resources */,
+				664A26B514E334EF00C297E6 /* Serenity.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +271,7 @@
 				66F5F19514DB420E0068FD20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
