@@ -415,9 +415,9 @@ third-party developers.
 Resources and Bundles
 =====================
 
-To distribute resources with a framework we are going to provide the developer with a separate
-.bundle that contains all of the strings and resources. This provides a number of advantages over
-including the resources in the .framework itself.
+To distribute resources with a framework, we are going to provide the developer with a separate
+.bundle that contains all of the strings and resources. This distribution method provides a number
+of advantages over including the resources in the .framework itself.
 
 - Encapsulation of resources. We can scope resource loading to our framework's bundle.
 - Easy to add bundles to projects.
