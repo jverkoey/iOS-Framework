@@ -2,6 +2,10 @@ Building a static iOS framework is a pain in the ass. There are a variety of exi
 already and each one has its own disadvantages. Presented here is a solution that meets all of the
 following constraints while having no deal-breaking disadvantages.
 
+Shameless plug: if you appreciate high-speed iOS development, check out
+[Nimbus iOS framework](http://nimbuskit.info/), the iOS framework whose growth is bounded by its
+documentation.
+
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
 
 - Fast iterative compilation times (up to 3x faster than some solutions!).
