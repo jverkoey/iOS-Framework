@@ -464,50 +464,14 @@ the bundle target that you created.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundleresource.png)
 
-### Step 3: Create the Bundle Folder Structure
-
-We are going to create a "Loadable Bundle" as outlined in the following Apple document:
-
-https://developer.apple.com/library/mac/#documentation/CoreFoundation/Conceptual/CFBundles/BundleTypes/BundleTypes.html
-
-Our bundle is only going to be used for resource loading, so our bundle structure will need to
-resemble the following:
-
-```
-Serenity.bundle/
-  Contents/
-    Info.plist
-    Resources/
-      *.png
-      *.nib
-      *.lproj/
-        <Localized files>
-```
-
-By default the bundle target will copy all of the files to the root directory, so we're going to
-move them around with the following script. Add a new Run Script phase and paste the following
-script into it.
-
-```bash
-rm -rf "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents"
-mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources"
-mv "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Info.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents"
-mv ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/*.png ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources/
-mv ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/*.nib ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources/
-mv ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/*.lproj ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/Contents/Resources/
-```
-
-Modify the script accordingly as you work with more file types. There is likely a simpler way to
-write this script so that it will capture all files.
-
-### Step 4: Add the Bundle Target to your Aggregate Target
+### Step 3: Add the Bundle Target to your Aggregate Target
 
 Whenever we build the framework for distribution we likely also want to build the bundle. Add the
 bundle target to your aggregate target's dependencies.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundledependency.png)
 
-### Step 5: Loading Bundle Resources
+### Step 4: Loading Bundle Resources
 
 In order to load bundle resources, we must first ask the third-party developer to add the .bundle to
 their application. To do so they will simply drag the .bundle that you distributed with the
@@ -521,14 +485,13 @@ To load resources from the bundle we will use the following code:
 ```obj-c
 // Load the framework bundle.
 + (NSBundle *)frameworkBundle {
-  static BOOL didAttemptLoad = NO;
   static NSBundle* frameworkBundle = nil;
-  if (!didAttemptLoad) {
-    didAttemptLoad = YES;
+  static dispatch_once_t predicate;
+  dispatch_once(&predicate, ^{
     NSString* mainBundlePath = [[NSBundle mainBundle] resourcePath];
     NSString* frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:@"Serenity.bundle"];
     frameworkBundle = [[NSBundle bundleWithPath:frameworkBundlePath] retain];
-  }
+  });
   return frameworkBundle;
 }
 

@@ -19,14 +19,13 @@
 @implementation Widget
 
 + (NSBundle *)frameworkBundle {
-  static BOOL didAttemptLoad = NO;
   static NSBundle* frameworkBundle = nil;
-  if (!didAttemptLoad) {
-    didAttemptLoad = YES;
+  static dispatch_once_t predicate;
+  dispatch_once(&predicate, ^{
     NSString* mainBundlePath = [[NSBundle mainBundle] resourcePath];
     NSString* frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:@"Serenity.bundle"];
     frameworkBundle = [[NSBundle bundleWithPath:frameworkBundlePath] retain];
-  }
+  });
   return frameworkBundle;
 }
 
