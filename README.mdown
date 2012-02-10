@@ -515,15 +515,15 @@ This is the easy part (and what your third-party developers will have to do). Si
 
 Import your framework header and you're kickin' ass.
 
+```obj-c
+#import <Serenity/Serenity.h>
+```
+
 ### Resources
 
 If you're distributing resources with your framework then you will also send the .bundle file to the
 developers. The developer will then drag the .bundle file into their application and ensure that
 it's added to the application target.
-
-```obj-c
-#import <Serenity/Serenity.h>
-```
 
 <a name="first_parties" />
 Developing the Framework as a Dependent Project
