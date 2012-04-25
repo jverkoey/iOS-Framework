@@ -378,6 +378,8 @@ xcodebuild -project "${PROJECT_FILE_PATH}" -target "${TARGET_NAME}" -configurati
 
 # Smash the two static libraries into one fat binary and store it in the .framework
 lipo -create "${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" -output "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}"
+
+cp -a "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}"
 ```
 
 #### Important Note
@@ -403,10 +405,7 @@ static library and click "Show in Finder". If this doesn't open Finder to where 
 exists then try opening
 `~/Library/Developer/Xcode/DerivedData/<project name>/Build/Products/Debug-iphonesimulator/`.
 
-Within this folder you will see your .framework folder. <b>Note</b>: the fat .framework binary will
-be built in the active platform's folder. If you're building for the iPhone simulator, for example,
-then the .framework fat binary will be placed in the `-iphonesimulator` folder. Always make sure
-that you are grabbing the correct .framework when you are preparing to distribute it!
+Within this folder you will see your .framework folder.
 
 You can now drag the .framework elsewhere, zip it up, upload it, and distribute it to your
 third-party developers.
