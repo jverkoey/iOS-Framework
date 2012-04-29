@@ -20,7 +20,7 @@ then
     SF_SDK_PLATFORM=${BASH_REMATCH[1]}
 else
     echo "Could not find platform name from SDK_NAME: $SDK_NAME"
-	exit 1
+    exit 1
 fi
 
 if [[ "$SDK_NAME" =~ ([0-9]+.*$) ]]
@@ -28,7 +28,7 @@ then
     SF_SDK_VERSION=${BASH_REMATCH[1]}
 else
     echo "Could not find sdk version from SDK_NAME: $SDK_NAME"
-	exit 1
+    exit 1
 fi
 
 if [[ "$SF_SDK_PLATFORM" = "iphoneos" ]]
@@ -43,7 +43,7 @@ then
     SF_OTHER_BUILT_PRODUCTS_DIR="${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}"
 else
     echo "Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR"
-	exit 1
+    exit 1
 fi
 
 # Build the other platform.
