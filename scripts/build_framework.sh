@@ -12,7 +12,7 @@ SF_TARGET_NAME=${PROJECT_NAME}
 SF_EXECUTABLE_PATH="lib${SF_TARGET_NAME}.a"
 SF_WRAPPER_NAME="${SF_TARGET_NAME}.framework"
 
-# The following conditonals come from
+# The following conditionals come from
 # https://github.com/kstenerud/iOS-Universal-Framework
 
 if [[ "$SDK_NAME" =~ ([A-Za-z]+) ]]
@@ -20,25 +20,22 @@ then
     SF_SDK_PLATFORM=${BASH_REMATCH[1]}
 else
     echo "Could not find platform name from SDK_NAME: $SDK_NAME"
-    exit 1
+exit 1
 fi
 
 if [[ "$SDK_NAME" =~ ([0-9]+.*$) ]]
 then
-      SF_SDK_VERSION=${BASH_REMATCH[1]}
+    SF_SDK_VERSION=${BASH_REMATCH[1]}
 else
     echo "Could not find sdk version from SDK_NAME: $SDK_NAME"
-    exit 1
+exit 1
 fi
 
 if [[ "$SF_SDK_PLATFORM" = "iphoneos" ]]
 then
     SF_OTHER_PLATFORM=iphonesimulator
-    SF_ARCHS=i386
 else
     SF_OTHER_PLATFORM=iphoneos
-    # Force armv6 to be built because Xcode 4 likes to only build armv7
-    SF_ARCHS="armv6 armv7"
 fi
 
 if [[ "$BUILT_PRODUCTS_DIR" =~ (.*)$SF_SDK_PLATFORM$ ]]
@@ -46,11 +43,14 @@ then
     SF_OTHER_BUILT_PRODUCTS_DIR="${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}"
 else
     echo "Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR"
-    exit 1
+exit 1
 fi
 
 # Build the other platform.
-xcodebuild -project "${PROJECT_FILE_PATH}" -target "${TARGET_NAME}" -configuration "${CONFIGURATION}" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR="${BUILD_DIR}" CONFIGURATION_TEMP_DIR="${PROJECT_TEMP_DIR}/${CONFIGURATION}-${SF_OTHER_PLATFORM}" ARCHS="${SF_ARCHS}" $ACTION
+xcodebuild -project "${PROJECT_FILE_PATH}" -target "${TARGET_NAME}" -configuration "${CONFIGURATION}" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR="${BUILD_DIR}" $ACTION
 
 # Smash the two static libraries into one fat binary and store it in the .framework
 lipo -create "${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" -output "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}"
+
+# Copy the binary to the other architecture folder to have a complete framework in both.
+cp -a "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}"
