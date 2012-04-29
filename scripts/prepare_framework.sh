@@ -1,6 +1,5 @@
 set -e
 
-mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A"
 mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
 
 # Link the "Current" version to "A"
