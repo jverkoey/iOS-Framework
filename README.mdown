@@ -251,7 +251,6 @@ the title of the phase (I've named it "Prepare Framework", for example).
 ```bash
 set -e
 
-mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A"
 mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
 
 # Link the "Current" version to "A"
@@ -262,6 +261,7 @@ mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
 # The -a ensures that the headers maintain the source modification date so that we don't constantly
 # cause propagating rebuilds of files that import these headers.
 /bin/cp -a "${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
+
 ```
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/prepareframework.png)
@@ -350,7 +350,7 @@ fi
 
 if [[ "$SDK_NAME" =~ ([0-9]+.*$) ]]
 then
-      SF_SDK_VERSION=${BASH_REMATCH[1]}
+    SF_SDK_VERSION=${BASH_REMATCH[1]}
 else
     echo "Could not find sdk version from SDK_NAME: $SDK_NAME"
     exit 1
@@ -359,11 +359,8 @@ fi
 if [[ "$SF_SDK_PLATFORM" = "iphoneos" ]]
 then
     SF_OTHER_PLATFORM=iphonesimulator
-    SF_ARCHS=i386
 else
     SF_OTHER_PLATFORM=iphoneos
-    # Force armv6 to be built because Xcode 4 likes to only build armv7
-    SF_ARCHS="armv6 armv7"
 fi
 
 if [[ "$BUILT_PRODUCTS_DIR" =~ (.*)$SF_SDK_PLATFORM$ ]]
@@ -375,12 +372,14 @@ else
 fi
 
 # Build the other platform.
-xcodebuild -project "${PROJECT_FILE_PATH}" -target "${TARGET_NAME}" -configuration "${CONFIGURATION}" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR="${BUILD_DIR}" CONFIGURATION_TEMP_DIR="${PROJECT_TEMP_DIR}/${CONFIGURATION}-${SF_OTHER_PLATFORM}" ARCHS="${SF_ARCHS}" $ACTION
+xcodebuild -project "${PROJECT_FILE_PATH}" -target "${TARGET_NAME}" -configuration "${CONFIGURATION}" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR="${BUILD_DIR}" $ACTION
 
 # Smash the two static libraries into one fat binary and store it in the .framework
 lipo -create "${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" -output "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}"
 
+# Copy the binary to the other architecture folder to have a complete framework in both.
 cp -a "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}"
+
 ```
 
 #### Important Note
