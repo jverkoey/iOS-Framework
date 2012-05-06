@@ -210,6 +210,7 @@ copied to the correct location in the copy headers phase.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/publicheaders.png)
 
+<a name="set_the_framework_version_for_static_library_target" />
 ### Step 3: Set the Framework Version
 
 Select the project in the file explorer and then click the "Build Settings". Search for "framework version" and then set the expected value for all configurations.
@@ -321,14 +322,14 @@ Add the static library target to the "Target Dependencies".
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/targetdependencies.png)
 
-### Step 3: Set the Framework Version
+### Step 3: Ensure the Framework Version
 
-If you work with only one framework in your project and set the framework version setting properly following what mentioned in [Create the Static Library Target](#static_library_target) Step 3. You can ignore this step.
+If you work with only one framework in your project and set the framework version setting properly following what mentioned in [Create the Static Library Target: Step 3](#set_the_framework_version_for_static_library_target). You can ignore this step.
 
 Otherwise, 
 
 - add an user-defined setting named "FRAMEWORK_VERSION" in the aggregate target "Build Settings" if it does not existed
-- set it with the same value of the one set in its dependent static library target
+- ensuere the value is the same as the one set in its dependent static library target
 
 ### Step 4: Build the Other Platform
 
