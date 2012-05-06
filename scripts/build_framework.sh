@@ -8,9 +8,6 @@ fi
 set -u
 export SF_MASTER_SCRIPT_RUNNING=1
 
-# Add user-defined setting in project(or target)'s build settings
-# LIB_VERSION="0.1"
-
 SF_TARGET_NAME=${PROJECT_NAME}
 SF_EXECUTABLE_PATH="lib${SF_TARGET_NAME}.a"
 SF_WRAPPER_NAME="${SF_TARGET_NAME}.framework"
@@ -53,10 +50,7 @@ fi
 xcodebuild -project "${PROJECT_FILE_PATH}" -target "${TARGET_NAME}" -configuration "${CONFIGURATION}" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR="${BUILD_DIR}" OBJROOT="${OBJROOT}" BUILD_ROOT="${BUILD_ROOT}" SYMROOT="${SYMROOT}" $ACTION
 
 # Smash the two static libraries into one fat binary and store it in the .framework
-lipo -create "${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" -output "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/${LIB_VERSION}/${SF_TARGET_NAME}"
+lipo -create "${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" -output "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/${FRAMEWORK_VERSION}/${SF_TARGET_NAME}"
 
 # Copy the binary to the other architecture folder to have a complete framework in both.
-cp -a "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/${LIB_VERSION}/${SF_TARGET_NAME}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/${LIB_VERSION}/${SF_TARGET_NAME}"
-
-# Open the product directory in finder
-open "${BUILT_PRODUCTS_DIR}"
+cp -a "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/${FRAMEWORK_VERSION}/${SF_TARGET_NAME}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/${FRAMEWORK_VERSION}/${SF_TARGET_NAME}"
