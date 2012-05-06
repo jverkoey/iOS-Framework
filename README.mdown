@@ -210,7 +210,13 @@ copied to the correct location in the copy headers phase.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/publicheaders.png)
 
-### Step 3: Update the Public Headers Location
+### Step 3: Set the Framework Version
+
+Select the project in the file explorer and then click the "Build Settings". Search for "framework version" and then set the expected value for all configurations.
+
+If you are working with multiple Frameworks in one project, you may need to set this setting with various value in each target's "Build Settings".
+
+### Step 4: Update the Public Headers Location
 
 By default the static library project will copy private and public headers to the same folder:
 `/usr/local/include`. To avoid mistakenly copying private headers to our framework we want to ensure
@@ -251,16 +257,16 @@ the title of the phase (I've named it "Prepare Framework", for example).
 ```bash
 set -e
 
-mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
+mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/${FRAMEWORK_VERSION}/Headers"
 
-# Link the "Current" version to "A"
-/bin/ln -sfh A "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current"
-/bin/ln -sfh Versions/Current/Headers "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers"
-/bin/ln -sfh "Versions/Current/${PRODUCT_NAME}" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}"
+# Link the "Current" version to "${FRAMEWORK_VERSION}"
+ln -sfh ${FRAMEWORK_VERSION} "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current"
+ln -sfh Versions/Current/Headers "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers"
+ln -sfh "Versions/Current/${PRODUCT_NAME}" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}"
 
 # The -a ensures that the headers maintain the source modification date so that we don't constantly
 # cause propagating rebuilds of files that import these headers.
-/bin/cp -a "${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
+cp -a "${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/${FRAMEWORK_VERSION}/Headers"
 
 ```
 
@@ -315,7 +321,16 @@ Add the static library target to the "Target Dependencies".
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/targetdependencies.png)
 
-### Step 3: Build the Other Platform
+### Step 3: Set the Framework Version
+
+If you work with only one framework in your project and set the framework version setting properly following what mentioned in [Create the Static Library Target](#static_library_target) Step 3. You can ignore this step.
+
+Otherwise, 
+
+- add an user-defined setting named "FRAMEWORK_VERSION" in the aggregate target "Build Settings" if it does not existed
+- set it with the same value of the one set in its dependent static library target
+
+### Step 4: Build the Other Platform
 
 To build the other platform we're going to use a "Run Script" phase to execute some basic commands.
 Add a new "Run Script" build phase to your aggregate target and paste the following code into it.
@@ -375,10 +390,10 @@ fi
 xcodebuild -project "${PROJECT_FILE_PATH}" -target "${TARGET_NAME}" -configuration "${CONFIGURATION}" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR="${BUILD_DIR}" OBJROOT="${OBJROOT}" BUILD_ROOT="${BUILD_ROOT}" SYMROOT="${SYMROOT}" $ACTION
 
 # Smash the two static libraries into one fat binary and store it in the .framework
-lipo -create "${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" -output "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}"
+lipo -create "${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}" -output "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/${FRAMEWORK_VERSION}/${SF_TARGET_NAME}"
 
 # Copy the binary to the other architecture folder to have a complete framework in both.
-cp -a "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}"
+cp -a "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/${FRAMEWORK_VERSION}/${SF_TARGET_NAME}" "${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/${FRAMEWORK_VERSION}/${SF_TARGET_NAME}"
 
 ```
 
