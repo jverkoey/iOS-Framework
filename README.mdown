@@ -152,8 +152,7 @@ Within the project we are going to have three targets: a static library, a bundl
 The static library target will build the source into a static library (.a) and specify which headers
 will be "public", meaning they will be accessible from the .framework when we distribute it.
 
-The bundle target will contain all of our resources and will be loadable from the framework. Note:
-this part of the guide has not been written yet.
+The bundle target will contain all of our resources and will be loadable from the framework.
 
 The aggregate target will build the static library for i386/armv6/armv7, generate the fat framework
 binary, and also build the bundle. You will run this target when you plan to distribute the
