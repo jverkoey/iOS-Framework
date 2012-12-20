@@ -455,6 +455,9 @@ the value of Product Name with the name of your framework.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/serenityproductname.png)
 
+Finally, because it was created as a Mac OS X target, your bundle's build settings may contain a
+`COMBINE_HIDPI_ARTWORK` setting which you will have to delete or set to `NO`. 
+
 ### Ongoing Step: Add Resources to the Bundle Target Copy Files Phase
 
 Whenever you add new resources that you want to include with your framework you need to add it to
