@@ -172,7 +172,7 @@ Create the Static Library Target
 
 ### Step 1: Create a New "Cocoa Touch Static Library" Project
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newstaticlib.png)
+![New Cocoa Touch Static Library](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newstaticlib.png)
 
 The product name will be the name of your framework. For example, `Serenity` will generate
 `Serenity.framework` once we've set up the project.
@@ -200,14 +200,14 @@ This distinction is what allows you to have a concept of public and private APIs
 
 To modify the scope of any header, select the header in the project explorer and then expand the
 Utilities pane
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/utilitiesbutton.png)
+![Utilities Button](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/utilitiesbutton.png)
 (Cmd+Option+0).
 
 Look at the "Target Membership" group and ensure that the checkbox next to the .h file is checked.
 Change the scope of the header from "Project" to "Public". This will ensure that the header gets
 copied to the correct location in the copy headers phase.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/publicheaders.png)
+![Public Headers](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/publicheaders.png)
 
 ### Step 3: Update the Public Headers Location
 
@@ -218,7 +218,9 @@ select the project in the file explorer and then click the "Build Settings" tab.
 headers" and then set the "Public Headers Folder Path" to "$(PROJECT_NAME)Headers" for all configurations.
 If you are working with multiple Frameworks make sure that this folder is unique.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/publicheadersconfig.png)
+![Public Headers](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/publicheadersconfig.png)
+
+If XCode included a "Copy Files" build phase you can delete that build phase. Add a "Copy Headers" build phase if one doesn't already exist.
 
 ### Ongoing Step: Adding New Sources to the Framework
 
@@ -263,7 +265,7 @@ mkdir -p "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers"
 
 ```
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/prepareframework.png)
+![Prepare Framework](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/prepareframework.png)
 
 This will generate the following folder structure:
 
@@ -286,7 +288,7 @@ Try building your project now and look at the build products directory (usually
 see a `libSerenity.a` static library, a `Headers` folder, and a `Serenity.framework` folder that
 contains the basic skeleton of your framework.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/buildphase1.png)
+![Build Phase](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/buildphase1.png)
 
 <a name="framework_distribution_target">
 Create the Framework Distribution Target
@@ -306,13 +308,13 @@ To generate this fat binary we're going to build the static library target for e
 
 Click File => New Target and create a new Aggregate target. Title it something like "Framework".
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/aggregatetarget.png)
+![Aggregrate Target for Framework](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/aggregatetarget.png)
 
 ### Step 2: Add the Static Library as a Dependent Target
 
 Add the static library target to the "Target Dependencies".
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/targetdependencies.png)
+![Add as a Target Dependency](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/targetdependencies.png)
 
 ### Step 3: Build the Other Platform
 
@@ -433,11 +435,11 @@ different from your framework name or Xcode will not let you create the target. 
 target SerenityResources. We will rename the output of the target to Serenity.bundle in a following
 step.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundletarget.png)
+![New Bundle Target](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundletarget.png)
 
 Ensure that the Framework setting is set to "Core Foundation".
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundletarget2.png)
+![Core Foundation](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundletarget2.png)
 
 ### Step 2: Clean up the Bundle Target Settings
 
@@ -446,28 +448,28 @@ builds for because the bundle isn't actually going to have any code in it, but I
 things nice and consistent. Open the bundle target settings and delete the settings for
 Architectures, Base SDK, and Build Active Architecture Only.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundlesettings.png)
+![Bundle Settings](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundlesettings.png)
 
 This is also when you should change your bundle target's product name to the name of your framework
 rather than the target name. To do so, click your project in the Xcode file explorer, select the
 bundle target, and then click the Build Settings tab. Search for Product Name and then replace
 the value of Product Name with the name of your framework.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/serenityproductname.png)
+![Product Name](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/serenityproductname.png)
 
 ### Ongoing Step: Add Resources to the Bundle Target Copy Files Phase
 
 Whenever you add new resources that you want to include with your framework you need to add it to
 the bundle target that you created.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundleresource.png)
+![New Bundle Resource](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundleresource.png)
 
 ### Step 3: Add the Bundle Target to your Aggregate Target
 
 Whenever we build the framework for distribution we likely also want to build the bundle. Add the
 bundle target to your aggregate target's dependencies.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundledependency.png)
+![Bundle Dependency](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundledependency.png)
 
 ### Step 4: Loading Bundle Resources
 
@@ -476,7 +478,7 @@ their application. To do so they will simply drag the .bundle that you distribut
 .framework to their project and ensure that it is copied in the copy files phase of their app
 target.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/addbundle.png)
+![Add Bundle](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/addbundle.png)
 
 To load resources from the bundle we will use the following code:
 
@@ -509,7 +511,7 @@ Adding the Framework to a Third-Party Application
 This is the easy part (and what your third-party developers will have to do). Simply drag the
 .framework to your application's project, ensuring that it's being added to the necessary targets.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/thirdparty.png)
+![Third Party](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/thirdparty.png)
 
 Import your framework header and you're kickin' ass.
 
@@ -540,7 +542,7 @@ To add the framework as a dependent target in your application, drag the framewo
 Xcode and drop it in your application's frameworks folder. This will add a reference to the
 framework's xcodeproj folder.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/dependentapp.png)
+![Add Framework](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/dependentapp.png)
 
 ### Step 2: Make the Framework Static Library Target a Dependency
 
@@ -549,7 +551,7 @@ dependency. Select your project in the Xcode file explorer and open the "Build P
 the "Target Dependencies" group and click the + button. Select the static library target and click
 "Add".
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/addtarget.png)
+![Add target dependency](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/addtarget.png)
 
 ### Step 3: Link your Application with the Framework Static Library
 
@@ -557,7 +559,11 @@ In order to use the framework's static library we must link it into the applicat
 "Link Binary With Libraries" phase and click the + button. Select the `.a` file that's exposed by
 your framework's project and then click add.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/linker.png)
+![Link binary with libraries](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/linker.png)
+
+If you receive errors about missing symbols, if XCode fails to recognize the symbols from your framework, consider adding `-ObjC -all_load` to the build settings of your dependent project.
+
+![Optional Linker Flags](https://github.com/jeffremer/iOS-Framework/raw/master/gfx/linker_flags.png)
 
 ### Step 4: Import the Framework Header
 
@@ -574,12 +580,12 @@ can obviously choose whatever practice suits your needs.
 If you are developing resources for your framework you can also add the bundle target as a
 dependency.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundledependency2.png)
+![Add bundle resource](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundledependency2.png)
 
 You must then add the bundle to the Copy Bundle Resources phase of your application by expanding
 the products folder of your framework product and dragging the .bundle into that section.
 
-![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundlecopy.png)
+![Copy bundle resources](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundlecopy.png)
 
 ### Step 5: Build and Test
 
