@@ -87,7 +87,7 @@ because it may not be possible to modify the Xcode installations on the build se
 ### Problems with Both Fake and Real Frameworks
 
 In both frameworks there is a post-build step that builds the "inverse" platform. For example, if
-you're building the framework for i386, the post-build step will build the framework for armv6/armv7
+you're building the framework for i386, the post-build step will build the framework for armv6/armv7/armv7s
 and then smush the libraries together into one fat binary within the framework. The problem with
 this is that it **triples** the build time of the framework. Make one change to a .m file and
 suddenly you're rebuilding it for three platforms. Change a PCH and your project will effectively
@@ -154,7 +154,7 @@ will be "public", meaning they will be accessible from the .framework when we di
 
 The bundle target will contain all of our resources and will be loadable from the framework.
 
-The aggregate target will build the static library for i386/armv6/armv7, generate the fat framework
+The aggregate target will build the static library for i386/armv6/armv7/armv7s, generate the fat framework
 binary, and also build the bundle. You will run this target when you plan to distribute the
 .framework.
 
@@ -240,7 +240,7 @@ settings:
 
 In order to use the static library as though it were a framework we're going to generate the basic
 skeleton of the framework in the static library target. To do this we'll include a simple post-build
-script. Add a post-build script by selecting your project in the file navigator and clicking the
+script. Add a post-build script by selecting your target in the file navigator and clicking the
 "Build Phases" tab. From here, click "Add Build Phase" => "Add Run Script" and paste the following
 script in the source portion of the run script build phase. You can rename the phase by clicking
 the title of the phase (I've named it "Prepare Framework", for example).
@@ -298,7 +298,7 @@ example, if we're testing on the iPhone simulator then we only need to build the
 This changes when we want to distribute the framework to third party developers. The third-party
 developers don't have the option of rebuilding the framework for each platform, so we must provide
 what is called a "fat binary" version of the static library that is comprised of the possible
-platforms. These platforms include: i386, armv6, and armv7.
+platforms. These platforms include: i386, armv6, armv7, and armv7s.
 
 To generate this fat binary we're going to build the static library target for each platform.
 
