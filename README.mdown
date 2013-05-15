@@ -198,6 +198,11 @@ headers are headers that will be copied to the .framework and can be imported by
 framework. This differs from "project" headers which will *not* be distributed with the framework.
 This distinction is what allows you to have a concept of public and private APIs.
 
+To change a file's [target membership visibility in XCode 4.4+]
+(http://stackoverflow.com/questions/13571080/cant-change-target-membership-visibility-in-xcode-4-5),
+you'll need to go to the target you just created (Serenity), open the Build Phases tab, then click
+Add Build Phase > Add Copy Headers. You'll see 3 sections for Public, Private, and Project headers.
+
 To modify the scope of any header, select the header in the project explorer and then expand the
 Utilities pane
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/utilitiesbutton.png)
