@@ -209,7 +209,7 @@ Utilities pane
 (Cmd+Option+0).
 
 Look at the "Target Membership" group and ensure that the checkbox next to the .h file is checked.
-Change the scope of the header from "Project" to "Public". This will ensure that the header gets
+Change the scope of the header from "Project" to "Public". You might have to uncheck and check the box to get the dropdown list. This will ensure that the header gets
 copied to the correct location in the copy headers phase.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/publicheaders.png)
