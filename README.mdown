@@ -545,6 +545,8 @@ To add the framework as a dependent target in your application, drag the framewo
 Xcode and drop it in your application's frameworks folder. This will add a reference to the
 framework's xcodeproj folder.
 
+*Note: Close the XCode window regarding the framework code and try to drag and drop from the finder; otherwise, the project will not be added properly.
+
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/dependentapp.png)
 
 ### Step 2: Make the Framework Static Library Target a Dependency
