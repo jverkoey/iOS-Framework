@@ -553,18 +553,20 @@ static library but treating the static library as though it were a framework.
 
 ### Step 1: Add the Framework Project to your Application Project
 
-To add the framework as a dependent target in your application, drag the framework's xcodeproj to
+To add the framework as a dependent target in your application, from Finder drag the framework's .xcodeproj to
 Xcode and drop it in your application's frameworks folder. This will add a reference to the
-framework's xcodeproj folder.
+framework's xcodeproj folder. 
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/dependentapp.png)
 
 ### Step 2: Make the Framework Static Library Target a Dependency
 
 Once you've added the framework project to your app you can add the static library product as a
-dependency. Select your project in the Xcode file explorer and open the "Build Phases" tab. Expand
+dependency. Select your project in the Project Navigator and open the "Build Phases" tab. Expand
 the "Target Dependencies" group and click the + button. Select the static library target and click
 "Add".
+
+**Note:** Close your Static Library Project or the dependencies will not appear in the list. You can only have one instance of an Xcode project open.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/addtarget.png)
 
