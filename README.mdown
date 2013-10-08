@@ -313,7 +313,7 @@ To generate this fat binary we're going to build the static library target for e
 
 ### Step 1: Create an Aggregate Target
 
-Click File => New Target and create a new Aggregate target. Title it something like "Framework".
+Click File > New Target > iOS > Other and create a new Aggregate target. Title it something like "Framework".
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/aggregatetarget.png)
 
