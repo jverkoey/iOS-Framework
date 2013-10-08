@@ -200,7 +200,7 @@ This distinction is what allows you to have a concept of public and private APIs
 
 To change a file's [target membership visibility in XCode 4.4+]
 (http://stackoverflow.com/questions/13571080/cant-change-target-membership-visibility-in-xcode-4-5),
-you'll need to select the Static Library target you created (Serenity), open the Build Phases tab:
+you'll need to select the Static Library target you created (Serenity), open the Build Phases tab: 
 
 **Xcode 4.X:**
 Click on Add Build Phase > Add Copy Headers. 
@@ -223,7 +223,7 @@ copied to the correct location in the copy headers phase.
 By default the static library project will copy private and public headers to the same folder:
 `/usr/local/include`. To avoid mistakenly copying private headers to our framework we want to ensure
 that our public headers are copied to a separate directory, e.g. `$(PROJECT_NAME)Headers`. To change this setting,
-select the project in the file explorer and then click the "Build Settings" tab. Search for "public
+select the project in the Project Navigator and then click the "Build Settings" tab. Search for "public
 headers" and then set the "Public Headers Folder Path" to "$(PROJECT_NAME)Headers" for all configurations.
 If you are working with multiple Frameworks make sure that this folder is unique.
 
