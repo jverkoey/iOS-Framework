@@ -249,10 +249,18 @@ settings:
 
 In order to use the static library as though it were a framework we're going to generate the basic
 skeleton of the framework in the static library target. To do this we'll include a simple post-build
-script. Add a post-build script by selecting your target in the file navigator and clicking the
-"Build Phases" tab. From here, click "Add Build Phase" => "Add Run Script" and paste the following
-script in the source portion of the run script build phase. You can rename the phase by clicking
-the title of the phase (I've named it "Prepare Framework", for example).
+script. Add a post-build script by selecting your project from Project Navigator and then your static library target. Select the Build Phases tab.
+
+**Xcode 4.X:**
+Click Add Build Phase > Add Run Script
+
+**Xcode 5:**
+Click on the menu Editor > Add Build Phase > Add Run Script Build Phase
+
+Note: If the option is grayed out you must click on the Target Name > Build Phases > Click whitespace below the phases. The focus needs to be on the Build Phases or the menu options will remain grayed out.
+
+Paste the following script in the source portion of the run script build phase. Note: you can rename the phase by clicking
+the title of the phase (I've named mine "Prepare Framework").
 
 #### prepare_framework.sh
 
