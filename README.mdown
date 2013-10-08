@@ -442,9 +442,8 @@ phase that will correctly compile .xib files (a Copy Files phase does not accomp
 
 ### Step 1: Create the Bundle Target
 
-In the framework project, create a new bundle target. You will need to name the bundle something
-different from your framework name or Xcode will not let you create the target. I've named the
-target SerenityResources. We will rename the output of the target to Serenity.bundle in a following
+In the framework project, create a new bundle target. Click on File > New > Target > OS X > Bundle. You will need to name the bundle something
+different from your framework name or Xcode will not let you create the target. I've named the target SerenityResources. We will rename the output of the target to Serenity.bundle in a following
 step.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundletarget.png)
@@ -460,12 +459,14 @@ builds for because the bundle isn't actually going to have any code in it, but I
 things nice and consistent. Open the bundle target settings and delete the settings for
 Architectures, Base SDK, and Build Active Architecture Only.
 
+**Xcode 5:** Deleting a build setting will reset it to the Project's build setting. It should switch from OS X to iOS.
+
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundlesettings.png)
 
 This is also when you should change your bundle target's product name to the name of your framework
-rather than the target name. To do so, click your project in the Xcode file explorer, select the
-bundle target, and then click the Build Settings tab. Search for Product Name and then replace
-the value of Product Name with the name of your framework.
+rather than the target name. Click on your project in the Project Navigator and then select
+the bundle target. Click Build Settings, search for "Product Name", and then replace
+the value of Product Name with the name of your framework (e.g. $(TARGET_NAME) replaced by Serenity)
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/serenityproductname.png)
 
@@ -512,6 +513,8 @@ To load resources from the bundle we will use the following code:
 
 You can see an example of loading a resource from within the framework in the Widget object in the
 included Serenity framework.
+
+**Xcode 5:** Do not use the Asset Catalog for any resources within a bundle. On an iOS 7.0 only project, a bug causes the pathForResource method to return nil. 
 
 <a name="third_parties" />
 Adding the Framework to a Third-Party Application
