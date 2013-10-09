@@ -470,6 +470,14 @@ the value of Product Name with the name of your framework (e.g. $(TARGET_NAME) r
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/serenityproductname.png)
 
+### Step 3: Remove HIDPI Mac OS X Build Setting
+We created a OS X Bundle and it includes and option to merge HIDPI (retina and non-retina) art assets into a .tiff file. You don't want this behavior and need to disable it, or you will be unable to load your image assets from the bundle.
+
+In the Bundle target go to Build Settings and search for `COMBINE_HIDPI_IMAGES` and delete the user defined setting. When you build, verify that your @2x.png and .png images are all in the bundle.
+
+![Delete the COMBINE_HIDPI_IMAGES setting](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/delete_combine_hidpi.png)
+![](https://raw.github.com/PaulSolt/iOS-Framework/iOS-7/gfx/delete_combine_hidpi.png)
+
 ### Ongoing Step: Add Resources to the Bundle Target Copy Files Phase
 
 Whenever you add new resources that you want to include with your framework you need to add it to
@@ -477,14 +485,14 @@ the bundle target that you created.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/newbundleresource.png)
 
-### Step 3: Add the Bundle Target to your Aggregate Target
+### Step 4: Add the Bundle Target to your Aggregate Target
 
 Whenever we build the framework for distribution we likely also want to build the bundle. Add the
 bundle target to your aggregate target's dependencies.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundledependency.png)
 
-### Step 4: Loading Bundle Resources
+### Step 5: Loading Bundle Resources
 
 In order to load bundle resources, we must first ask the third-party developer to add the .bundle to
 their application. To do so they will simply drag the .bundle that you distributed with the
