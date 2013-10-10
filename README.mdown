@@ -476,7 +476,6 @@ We created a OS X Bundle and it includes and option to merge HIDPI (retina and n
 In the Bundle target go to Build Settings and search for `COMBINE_HIDPI_IMAGES` and delete the user defined setting. When you build, verify that your @2x.png and .png images are all in the bundle.
 
 ![Delete the COMBINE_HIDPI_IMAGES setting](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/delete_combine_hidpi.png)
-![](https://raw.github.com/PaulSolt/iOS-Framework/iOS-7/gfx/delete_combine_hidpi.png)
 
 ### Ongoing Step: Add Resources to the Bundle Target Copy Files Phase
 
