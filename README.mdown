@@ -607,7 +607,13 @@ the products folder of your framework product and dragging the .bundle into that
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/bundlecopy.png)
 
-### Step 5: Build and Test
+### Step 5: Check Dependent Target Build Settings
+
+Set the setting `Skip Install` to `Yes` for any static library or bundle target that you create. Check all the targets that are dependencies of your application project. If the option is `No` then you will be unable to build an archive of the project containing the target dependenices. Xcode will create a Generic Xcode Archive, which cannot be shared adhoc, validated, or submitted.
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/skip_install.png)
+
+### Step 6: Build and Test
 
 Build your application and verify a couple things:
 
