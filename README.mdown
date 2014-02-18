@@ -206,7 +206,7 @@ you'll need to select the Static Library target you created (Serenity), open the
 Click on Add Build Phase > Add Copy Headers. 
 
 **Xcode 5:**
-Add Build Phases from the menu. Click on Editor > Add Build Setting -> Add Copy Headers. Note: If the menu options are grayed out, you'll need to click on the whitespace below the Build Phases to regain focus and retry.
+Add Build Phases from the menu. Click on Editor > Add Build Phase > Add Copy Headers Build Phase. Note: If the menu options are grayed out, you'll need to click on the whitespace below the Build Phases to regain focus and retry.
 
 You'll see 3 sections for Public, Private, and Project headers. To modify the scope of any header, drag and drop the header files between the sections. Alternatively you can open the Project Navigator and select the header. Next expand the Utilities pane for the File Inspector.
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/utilitiesbutton.png)
