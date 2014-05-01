@@ -420,8 +420,31 @@ exists then try opening
 
 Within this folder you will see your .framework folder.
 
-You can now drag the .framework elsewhere, zip it up, upload it, and distribute it to your
-third-party developers.
+Verify that your framework includes all of the architectures that are available by running the
+`file` command on your framework's static library:
+
+```bash
+file Serenity.framework/Serenity
+```
+
+You should see output resembling:
+
+```bash
+Serenity.framework/Serenity: Mach-O universal binary with 5 architectures
+Serenity.framework/Serenity (for architecture i386):	current ar archive random library
+Serenity.framework/Serenity (for architecture x86_64):	current ar archive random library
+Serenity.framework/Serenity (for architecture armv7):	current ar archive random library
+Serenity.framework/Serenity (for architecture armv7s):	current ar archive random library
+Serenity.framework/Serenity (for architecture cputype (16777228) cpusubtype (0)):	current ar archive random library
+```
+
+If you don't see all of the architectures listed, make sure that you're looking at the right
+framework output. If you're building with the Simulator as your target, the correct framework
+will be in the -iphonesimulator folder. Sometimes it can help to delete the Debug- and Release-
+folders to ensure that you're getting a truly clean build.
+
+Once you've verified that the framework includes all of the architectures, you can now move
+the .framework elsewhere, zip it up, upload it, and distribute it to your third-party developers.
 
 <a name="resources" />
 Resources and Bundles
