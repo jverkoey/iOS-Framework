@@ -424,18 +424,13 @@ Verify that your framework includes all of the architectures that are available 
 `file` command on your framework's static library:
 
 ```bash
-file Serenity.framework/Serenity
+lipo -info Serenity.framework/Serenity
 ```
 
 You should see output resembling:
 
 ```bash
-Serenity.framework/Serenity: Mach-O universal binary with 5 architectures
-Serenity.framework/Serenity (for architecture i386):	current ar archive random library
-Serenity.framework/Serenity (for architecture x86_64):	current ar archive random library
-Serenity.framework/Serenity (for architecture armv7):	current ar archive random library
-Serenity.framework/Serenity (for architecture armv7s):	current ar archive random library
-Serenity.framework/Serenity (for architecture cputype (16777228) cpusubtype (0)):	current ar archive random library
+Architectures in the fat file: Serenity.framework/Serenity are: i386 x86_64 armv7 armv7s arm64
 ```
 
 If you don't see all of the architectures listed, make sure that you're looking at the right
