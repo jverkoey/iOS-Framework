@@ -240,7 +240,7 @@ scope will be "Project", meaning it will not be copied to the framework's public
 
 Using a category should be a **necessity**, not a convenience, when distributing a framework.
 
-Frameworks, by their very nature, obscure a lot of implementation details, very likely leading to severe run-time tomfoolery as symbols get overwritten and your client's app starts performing in wonderfully novel ways (much to their users' chagrin).
+Frameworks, by their very nature, obscure most implementation details, very likely leading to severe run-time tomfoolery as symbols get overwritten and your client's app starts performing in wonderfully novel ways (much to their users' chagrin).
 
 If you **absolutely** ***must*** use categories, please check out the [FAQ](#faq) in order to avoid having your clients encounter linker problems when attempting to use them.
 
