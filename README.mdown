@@ -28,6 +28,7 @@ Table of Contents
 - [Resources and Bundles](#resources)
 - [Adding the Framework to a Third-Party Application](#third_parties)
 - [Developing the Framework as a Dependent Project](#first_parties)
+- [FAQ](#faq)
 - [License](#license)
 
 <a name="existing_solutions" />
@@ -234,6 +235,14 @@ If you are working with multiple Frameworks make sure that this folder is unique
 Whenever you add new source to the framework you must decide whether to expose the .h publicly or
 not. To modify a header's scope you will follow the same process as Step 2. By default a header's
 scope will be "Project", meaning it will not be copied to the framework's public headers.
+
+#### An Important Note on Categories
+
+Using a category should be a **necessity**, not a convenience, when distributing a framework.
+
+Frameworks, by their very nature, obscure a lot of implementation details, very likely leading to severe run-time tomfoolery as symbols get overwritten and your client's app starts performing in wonderfully novel ways (much to their users' chagrin).
+
+If you **absolutely** ***must** use categories, please check out the [FAQ](#faq) in order to avoid having your clients encounter linker problems when attempting to use them.
 
 ### Step 4: Disable Code Stripping
 
@@ -638,6 +647,53 @@ Build your application and verify a couple things:
 - Your framework should be built before your application.
 - Your framework should be linked into the application.
 - You shouldn't get any compiler or linker errors.
+
+<a name="faq" />
+FAQ
+===
+
+How do I resolve 'unrecognized selector sent to instance' linker errors?
+------------------------------------------------------------------------
+
+- **The recommended solution** is to use [NimbusKitBasics' NI_FIX_CATEGORY_BUG](https://github.com/NimbusKit/basics#avoid-requiring-the--all_load-and--force_load-flags) whenever possible. This solution minimizes the amount of your framework that will need to be linked into the client's app binary.
+- [Breakdown of solutions](http://stackoverflow.com/a/22264650/65455) from [Mecki](http://stackoverflow.com/users/15809/mecki) on stackoverflow.
+
+How do I include Third-Party Libraries in my Framework?
+-------------------------------------------------------
+
+Don't.
+
+Ok, you can, but it's a bitch to do correctly - and it's really important that you do it correctly.
+
+The scenario you want to avoid is the following:
+
+- You've linked some third-party library in your code (e.g. [NimbusKit's Markdown](https://github.com/nimbuskit/markdown)).
+- A client using your framework also wants to use NimbusKit's Markdown.
+- Their app fails to build due to duplicate symbol linker errors.
+- Client gets incredibly frustrated with your framework and uses something else.
+
+Solutions, in order of easiest-to-most-difficult:
+
+### Pure framework build (no third-party libraries included) + library source distribution
+
+Bundle any libraries that your framework uses alongside your framework when you distribute it (e.g. distribute a zip file with your built .framework and a third-party folder containing the source for all libraries used). Make it clear in your setup guide that the additional libraries will also need to be compiled into the client's app.
+
+This:
+
+- gives the client the flexibility to use their own version of the library;
+- encourages proper attribution and license redistribution of any open source code you're using;
+- and, most importantly, ensures that the client will not encounter duplicate symbol linker errors.
+
+### Symbol Prefixing
+
+This is hard to do correctly and requires meticulous ongoing care to ensure that no symbols ever slip through the build process.
+
+This solution allows you to completely guarantee that a given version of a third-party library will be used by your framework. It also allows you to distribute a single .framework, easing the setup and versioning process.
+
+Some approaches to symbol prefixing:
+
+- High level overview by [featherless](http://twitter.com/featherless) on StackOverflow: [http://stackoverflow.com/questions/11512291/prefix-static-library-ios/19341366#19341366](http://stackoverflow.com/questions/11512291/prefix-static-library-ios/19341366#19341366).
+- [Avoiding Dependency Collisions in an iOS Library](http://pdx.esri.com/blog/2013/12/13/namespacing-dependencies/) on esri.com.
 
 <a name="license" />
 License
