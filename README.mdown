@@ -254,7 +254,12 @@ settings:
     "Strip Debug Symbols During Copy" => No (for all settings)
     "Strip Style" => Non-Global Symbols (for all settings)
 
-### Step 5: Prepare the Framework for use as a Dependent Target
+### Step 5: Enable all architecture support
+
+We want our framework able to work with all device architectures. To do so, change this in your project file (not your target files !):
+    "Build Active Architecture Only" => No (for all settings)
+
+### Step 6: Prepare the Framework for use as a Dependent Target
 
 In order to use the static library as though it were a framework we're going to generate the basic
 skeleton of the framework in the static library target. To do this we'll include a simple post-build
