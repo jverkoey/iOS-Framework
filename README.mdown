@@ -409,7 +409,7 @@ cp -a "${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}" "$
 
 ```
 
-#### Important Note
+#### Important Notes
 
 The above script assumes that your library name matches your project name in the following line:
 
@@ -422,6 +422,13 @@ Serenity) then you need to explicitly set the target name on that line. For exam
 
 ```bash
 SF_TARGET_NAME=Serenity
+```
+
+If you are using Cocoapods, you need to build the workspace instead of the project. Assuming your 
+Scheme matches your aggregate target name, change the `xcrun xcodebuild` line to:
+
+```bash
+xcrun xcodebuild ONLY_ACTIVE_ARCH=NO -workspace "${PROJECT_DIR}/${PROJECT_NAME}.xcworkspace" -scheme "${TARGET_NAME}" -configuration "${CONFIGURATION}" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR="${BUILD_DIR}" OBJROOT="${OBJROOT}" BUILD_ROOT="${BUILD_ROOT}" SYMROOT="${SYMROOT}" $ACTION
 ```
 
 ### Step 4: Build and Verify
