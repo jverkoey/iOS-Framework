@@ -31,7 +31,7 @@ else
     exit 1
 fi
 
-if [[ "$SF_SDK_PLATFORM" = "iphoneos" ]]
+if [[ "$SF_SDK_PLATFORM" == "iphoneos" ]]
 then
     SF_OTHER_PLATFORM=iphonesimulator
 else
