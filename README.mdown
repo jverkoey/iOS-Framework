@@ -316,6 +316,13 @@ contains the basic skeleton of your framework.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/buildphase1.png)
 
+### Step 7: Enable bitcode (Optional)
+
+**Xcode 7.x** is required for bitcode support.
+
+To include bitcode in your framework, just add **-fembed-bitcode** flag to the static
+library C flags.
+
 <a name="framework_distribution_target">
 Create the Framework Distribution Target
 ----------------------------------------
