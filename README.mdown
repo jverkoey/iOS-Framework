@@ -21,7 +21,7 @@ documentation.
 
 The Swift language, as of Nov 2015, is still in flux. By including Swift code in your
 distributed binary .framework, you are forcing the users of your framework to have the
-same version of Swift as when you built your framework. This is bad because it will
+same version of Swift as when you built your framework. **This is bad** because it will
 eventually result in your clients encountering the following error:
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/swift-error.png)
