@@ -17,6 +17,22 @@ documentation.
 
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
 
+## Important notice regarding Swift code
+
+The Swift language, as of Nov 2015, is still in flux. By including Swift code in your
+distributed binary .framework, you are forcing the users of your framework to have the
+same version of Swift as when you built your framework. This is bad because it will
+eventually result in your clients encountering the following error:
+
+![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/swift-error.png)
+
+While Swift the language is still changing, we **highly recommend** that you **do not**
+build Swift code into your .frameworks. This applies to both *static* and *dynamic*
+frameworks.
+
+With that out of the way, let's learn how to make a static iOS framework...built only
+with Objective-C.
+
 Table of Contents
 =================
 
@@ -714,5 +730,5 @@ License
 Except as otherwise noted, the content of this page is licensed under the Creative Commons
 Attribution 3.0 Unported License, and code samples are licensed under the Apache 2.0 License.
 
-To view a copy of this license, visit http://creativecommons.org/licenses/by/3.0/ or send a letter
+To view a copy of this license, visit httip://creativecommons.org/licenses/by/3.0/ or send a letter
 to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
