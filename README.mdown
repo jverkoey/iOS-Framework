@@ -523,6 +523,10 @@ rather than the target name. Click on your project in the Project Navigator and 
 the bundle target. Click Build Settings, search for "Product Name", and then replace
 the value of Product Name with the name of your framework (e.g. $(TARGET_NAME) replaced by Serenity)
 
+NOTE: Make sure the in your build settings COMBINE_HDPI_IMAGES is set to NO.
+Otherwise you end up with a single image file with a .tiff extension instead of the
+original ImageName.png and ImageName@2x.png files.
+
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/serenityproductname.png)
 
 ### Step 3: Remove HIDPI Mac OS X Build Setting
