@@ -332,6 +332,11 @@ contains the basic skeleton of your framework.
 
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/buildphase1.png)
 
+### Step 6: Add flag to enable Objective-C categories
+
+If you have created categories within your framework, you will need to set the "Perform Single-Object 
+Prelink" to YES in the Projects Build Settings.
+
 <a name="framework_distribution_target">
 Create the Framework Distribution Target
 ----------------------------------------
