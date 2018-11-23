@@ -1,4 +1,4 @@
-Building a static iOS framework is a pain in the ass. There are a variety of existing solutions
+Building a static iOS framework is a pain. There are a variety of existing solutions
 already and each one has its own disadvantages. Presented here is a solution that meets all of the
 following constraints while having no deal-breaking disadvantages.
 
@@ -48,6 +48,7 @@ Table of Contents
 - [License](#license)
 
 <a name="existing_solutions" />
+
 Existing Solutions
 ==================
 
@@ -141,6 +142,7 @@ than it should be because you're shipping off a fat binary with your application
 And so without further ado...
 
 <a name="walkthrough" />
+
 How to Create a Static Framework for iOS
 ========================================
 
@@ -158,6 +160,7 @@ project if you so desire. I will also include project templates for easily creat
 .framework.
 
 <a name="overview" />
+
 Overview
 --------
 
@@ -184,6 +187,7 @@ the same way a third party developer would (i.e. importing <MyFramework/MyFramew
 as expected). <a href="#first_parties">Jump to the dependent project walkthrough</a>.
 
 <a name="static_library_target" />
+
 Create the Static Library Target
 --------------------------------
 
@@ -333,6 +337,7 @@ contains the basic skeleton of your framework.
 ![](https://github.com/jverkoey/iOS-Framework/raw/master/gfx/buildphase1.png)
 
 <a name="framework_distribution_target">
+  
 Create the Framework Distribution Target
 ----------------------------------------
 
@@ -479,6 +484,7 @@ Once you've verified that the framework includes all of the architectures, you c
 the .framework elsewhere, zip it up, upload it, and distribute it to your third-party developers.
 
 <a name="resources" />
+
 Resources and Bundles
 =====================
 
@@ -579,6 +585,7 @@ included Serenity framework.
 **Xcode 5:** Do not use the Asset Catalog for any resources within a bundle. On an iOS 7.0 only project, a bug causes the pathForResource method to return nil. 
 
 <a name="third_parties" />
+
 Adding the Framework to a Third-Party Application
 =================================================
 
@@ -603,6 +610,7 @@ developers. The developer will then drag the .bundle file into their application
 it's added to the application target.
 
 <a name="first_parties" />
+
 Developing the Framework as a Dependent Project
 ===============================================
 
@@ -677,6 +685,7 @@ Build your application and verify a couple things:
 - You shouldn't get any compiler or linker errors.
 
 <a name="faq" />
+
 FAQ
 ===
 
@@ -691,7 +700,7 @@ How do I include Third-Party Libraries in my Framework?
 
 Don't.
 
-Ok, you can, but it's a bitch to do correctly - and it's really important that you do it correctly.
+Ok, you can, but it's touch to do correctly - and it's really important that you do it correctly.
 
 The scenario you want to avoid is the following:
 
@@ -724,6 +733,7 @@ Some approaches to symbol prefixing:
 - [Avoiding Dependency Collisions in an iOS Library](http://pdx.esri.com/blog/2013/12/13/namespacing-dependencies/) on esri.com.
 
 <a name="license" />
+
 License
 =======
 
